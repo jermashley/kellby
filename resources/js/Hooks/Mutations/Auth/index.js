@@ -1,0 +1,1 @@
+export { useRegisterUserMutation } from './useRegisterUserMutation'

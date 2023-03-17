@@ -18,6 +18,10 @@ Route::get('/', function () {
     return Inertia::render('Home/Index');
 });
 
+Route::get('/register', function () {
+    return Inertia::render('Auth/Register');
+})->middleware('guest')->name('register');
+
 Route::get('/dashboard', function () {
     return Inertia::render(('Dashboard/Index'));
 })->middleware('auth')->name('dashboard');

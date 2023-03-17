@@ -1,8 +1,5 @@
 module.exports = {
-  content: [
-    `./resources/**/*.{blade.php}`,
-    `./resources/**/*.{js,ts,jsx,tsx}`,
-  ],
+  content: [`./resources/**/*.blade.php`, `./resources/**/*.{js,ts,jsx,tsx}`],
   presets: [],
   darkMode: `media`,
   theme: {
