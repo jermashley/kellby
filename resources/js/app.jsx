@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { MantineProvider } from '@mantine/core'
 
 const queryClient = new QueryClient()
 
@@ -15,12 +16,21 @@ createInertiaApp({
   setup({ el, App, props }) {
     createRoot(el).render(
       <StrictMode>
-        <QueryClientProvider client={queryClient}>
-          {[`local`, `qa`].includes(import.meta.env.VITE_APP_ENV) ? (
-            <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
-          ) : null}
-          <App {...props} />
-        </QueryClientProvider>
+        <MantineProvider
+          theme={{ colorScheme: 'dark' }}
+          withGlobalStyles
+          withNormalizeCSS
+        >
+          <QueryClientProvider client={queryClient}>
+            {[`local`, `qa`].includes(import.meta.env.VITE_APP_ENV) ? (
+              <ReactQueryDevtools
+                initialIsOpen={false}
+                position="bottom-right"
+              />
+            ) : null}
+            <App {...props} />
+          </QueryClientProvider>
+        </MantineProvider>
       </StrictMode>,
     )
   },

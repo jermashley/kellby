@@ -1,83 +1,78 @@
 import { useRegisterUserForm } from '@Hooks/Forms/Auth'
 import { useRegisterUserMutation } from '@Hooks/Mutations/Auth'
+import DefaultLayout from '@Layouts/DefaultLayout'
+import { Button, Card, Flex, PasswordInput, TextInput } from '@mantine/core'
 
 const RegisterPage = () => {
   const registerUser = useRegisterUserMutation({
     onSuccess: (data) => console.log(data),
   })
 
-  const registerUserForm = useRegisterUserForm({
-    config: {
-      onSubmit: (values) => {
-        registerUser.mutate({ formData: values })
-      },
-    },
-  })
+  const registerUserForm = useRegisterUserForm()
 
   return (
-    <>
-      <h1>Register here</h1>
+    <DefaultLayout>
+      <>
+        <h1>Register here</h1>
 
-      <form
-        onSubmit={(e) => {
-          e.preventDefault()
-          registerUserForm.handleSubmit()
-        }}
-        className="flex flex-col items-start justify-start space-y-2 p-4"
-      >
-        <input
-          type="text"
-          name="first_name"
-          id="first_name"
-          onChange={registerUserForm.handleChange}
-          value={registerUserForm.values.first_name}
-          className="border"
-          placeholder="Jane"
-        />
+        <Card shadow="md" padding="lg" radius="md" maw="32rem">
+          <form
+            onSubmit={registerUserForm.onSubmit((values) =>
+              registerUser.mutate({ formData: values }),
+            )}
+          >
+            <Flex direction="column" justify="stretch" gap="sm">
+              <TextInput
+                withAsterisk
+                label="First name"
+                placeholder="Jane"
+                type="text"
+                {...registerUserForm.getInputProps('first_name')}
+              />
 
-        <input
-          type="text"
-          name="last_name"
-          id="last_name"
-          onChange={registerUserForm.handleChange}
-          value={registerUserForm.values.last_name}
-          className="border"
-          placeholder="Doe"
-        />
+              <TextInput
+                withAsterisk
+                label="Last name"
+                placeholder="Doe"
+                type="text"
+                {...registerUserForm.getInputProps('last_name')}
+              />
 
-        <input
-          type="email"
-          name="email"
-          id="email"
-          onChange={registerUserForm.handleChange}
-          value={registerUserForm.values.email}
-          className="border"
-          placeholder="jane.doe@email.com"
-        />
+              <TextInput
+                withAsterisk
+                label="Email"
+                placeholder="jane.doe@email.com"
+                type="email"
+                {...registerUserForm.getInputProps('email')}
+              />
 
-        <input
-          type="password"
-          name="password"
-          id="password"
-          onChange={registerUserForm.handleChange}
-          value={registerUserForm.values.password}
-          className="border"
-          placeholder="•••••••••"
-        />
+              <PasswordInput
+                withAsterisk
+                label="Password"
+                {...registerUserForm.getInputProps('password')}
+              />
 
-        <input
-          type="password"
-          name="password_confirmation"
-          id="password_confirmation"
-          onChange={registerUserForm.handleChange}
-          value={registerUserForm.values.password_confirmation}
-          className="border"
-          placeholder="•••••••••"
-        />
+              <PasswordInput
+                withAsterisk
+                label="Password"
+                {...registerUserForm.getInputProps('password_confirmation')}
+              />
 
-        <button type="submit">Submit</button>
-      </form>
-    </>
+              <Button
+                variant="light"
+                color="blue"
+                fullWidth
+                mt="md"
+                radius="md"
+                type="submit"
+              >
+                Submit
+              </Button>
+            </Flex>
+          </form>
+        </Card>
+      </>
+    </DefaultLayout>
   )
 }
 

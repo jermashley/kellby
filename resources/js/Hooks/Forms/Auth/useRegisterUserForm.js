@@ -1,4 +1,4 @@
-import { useFormik } from 'formik'
+import { useForm, yupResolver } from '@mantine/form'
 import * as Yup from 'yup'
 
 const registerUserSchema = Yup.object().shape({
@@ -17,7 +17,7 @@ const registerUserSchema = Yup.object().shape({
 })
 
 export const useRegisterUserForm = ({ config = {} } = {}) =>
-  useFormik({
+  useForm({
     initialValues: {
       first_name: ``,
       last_name: ``,
@@ -26,7 +26,7 @@ export const useRegisterUserForm = ({ config = {} } = {}) =>
       password_confirmation: ``,
     },
 
-    validationSchema: registerUserSchema,
+    validate: yupResolver(registerUserSchema),
 
     ...config,
   })
