@@ -1,14 +1,21 @@
-import { useRegisterUserForm } from '@Hooks/Forms/Auth'
-import { useRegisterUserMutation } from '@Hooks/Mutations/Auth'
+import { useLoginForm } from '@Hooks/Forms/Auth'
+import { useLoginMutation } from '@Hooks/Mutations/Auth'
 import DefaultLayout from '@Layouts/DefaultLayout'
-import { Button, Card, Flex, PasswordInput, TextInput } from '@mantine/core'
+import {
+  Button,
+  Card,
+  Checkbox,
+  Flex,
+  PasswordInput,
+  TextInput,
+} from '@mantine/core'
 
 const LoginPage = () => {
-  const registerUser = useRegisterUserMutation({
+  const login = useLoginMutation({
     onSuccess: (data) => console.log(data),
   })
 
-  const registerUserForm = useRegisterUserForm()
+  const loginForm = useLoginForm()
 
   return (
     <DefaultLayout>
@@ -17,45 +24,28 @@ const LoginPage = () => {
 
         <Card shadow="md" padding="lg" radius="md" maw="32rem">
           <form
-            onSubmit={registerUserForm.onSubmit((values) =>
-              registerUser.mutate({ formData: values }),
+            onSubmit={loginForm.onSubmit((values) =>
+              login.mutate({ formData: values }),
             )}
           >
             <Flex direction="column" justify="stretch" gap="sm">
               <TextInput
                 withAsterisk
-                label="First name"
-                placeholder="Jane"
-                type="text"
-                {...registerUserForm.getInputProps('first_name')}
-              />
-
-              <TextInput
-                withAsterisk
-                label="Last name"
-                placeholder="Doe"
-                type="text"
-                {...registerUserForm.getInputProps('last_name')}
-              />
-
-              <TextInput
-                withAsterisk
                 label="Email"
                 placeholder="jane.doe@email.com"
                 type="email"
-                {...registerUserForm.getInputProps('email')}
+                {...loginForm.getInputProps('email')}
               />
 
               <PasswordInput
                 withAsterisk
                 label="Password"
-                {...registerUserForm.getInputProps('password')}
+                {...loginForm.getInputProps('password')}
               />
 
-              <PasswordInput
-                withAsterisk
-                label="Password"
-                {...registerUserForm.getInputProps('password_confirmation')}
+              <Checkbox
+                label="Remember me"
+                {...loginForm.getInputProps('remember')}
               />
 
               <Button
@@ -66,7 +56,7 @@ const LoginPage = () => {
                 radius="md"
                 type="submit"
               >
-                Submit
+                Login
               </Button>
             </Flex>
           </form>

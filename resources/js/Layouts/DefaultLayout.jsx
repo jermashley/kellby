@@ -25,9 +25,12 @@ import {
 import { Link } from '@inertiajs/react'
 import { AuthContext } from '@Contexts/AuthContext'
 import { useUserQuery } from '@Hooks/Queries/user'
+import { useLogoutMutation } from '@Hooks/Mutations/Auth'
 
 const DefaultLayout = ({ children }) => {
   const user = useUserQuery()
+
+  const logout = useLogoutMutation()
 
   const theme = useMantineTheme()
   const [opened, setOpened] = useState(false)
@@ -77,15 +80,22 @@ const DefaultLayout = ({ children }) => {
 
                   <Menu.Item
                     icon={<FontAwesomeIcon icon={faSignOut} fixedWidth />}
+                    onClick={() => logout.mutate()}
                   >
                     Sign out
                   </Menu.Item>
                 </Menu.Dropdown>
               </Menu>
             ) : (
-              <Link href={`/register`}>
-                <Text>Register</Text>
-              </Link>
+              <>
+                <Link href={`/register`}>
+                  <Text style={{ textDecoration: `underline` }}>Register</Text>
+                </Link>
+                /
+                <Link href={`/login`}>
+                  <Text style={{ textDecoration: `underline` }}>Login</Text>
+                </Link>
+              </>
             )}
 
             <MediaQuery largerThan="sm" styles={{ display: 'none' }}>

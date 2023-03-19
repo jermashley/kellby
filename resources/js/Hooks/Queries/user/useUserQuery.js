@@ -14,5 +14,7 @@ export const useUserQuery = ({ config = {} } = {}) =>
 
     select: ({ data }) => data,
 
+    retry: false,
+
     ...config,
   })

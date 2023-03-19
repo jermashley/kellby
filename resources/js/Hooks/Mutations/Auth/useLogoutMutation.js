@@ -1,3 +1,4 @@
+import { router } from '@inertiajs/react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
 
@@ -14,8 +15,8 @@ export const useLogoutMutation = () => {
     mutationFn: () => logout(),
 
     onSuccess: (data) => {
-      console.log(data)
       queryClient.clear()
+      router.visit(`/`)
     },
   })
 }
