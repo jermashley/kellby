@@ -1,13 +1,15 @@
 import { useLoginForm } from '@Hooks/Forms/Auth'
 import { useLoginMutation } from '@Hooks/Mutations/Auth'
-import DefaultLayout from '@Layouts/DefaultLayout'
+import GuestLayout from '@Layouts/GuestLayout'
 import {
   Button,
   Card,
+  Center,
   Checkbox,
   Flex,
   PasswordInput,
   TextInput,
+  Title,
 } from '@mantine/core'
 
 const LoginPage = () => {
@@ -18,17 +20,19 @@ const LoginPage = () => {
   const loginForm = useLoginForm()
 
   return (
-    <DefaultLayout>
-      <>
-        <h1>Register here</h1>
+    <GuestLayout>
+      <Center mt={`4rem`}>
+        <Card shadow="md" padding="lg" radius="md" maw="32rem" w={`100%`}>
+          <Title order={1} mb={`2rem`}>
+            Log in
+          </Title>
 
-        <Card shadow="md" padding="lg" radius="md" maw="32rem">
           <form
             onSubmit={loginForm.onSubmit((values) =>
               login.mutate({ formData: values }),
             )}
           >
-            <Flex direction="column" justify="stretch" gap="sm">
+            <Flex direction="column" justify="stretch" gap="md">
               <TextInput
                 withAsterisk
                 label="Email"
@@ -43,10 +47,12 @@ const LoginPage = () => {
                 {...loginForm.getInputProps('password')}
               />
 
-              <Checkbox
-                label="Remember me"
-                {...loginForm.getInputProps('remember')}
-              />
+              <Flex direction={`row`} justify={`flex-end`} align={`center`}>
+                <Checkbox
+                  label="Remember me"
+                  {...loginForm.getInputProps('remember')}
+                />
+              </Flex>
 
               <Button
                 variant="light"
@@ -61,8 +67,8 @@ const LoginPage = () => {
             </Flex>
           </form>
         </Card>
-      </>
-    </DefaultLayout>
+      </Center>
+    </GuestLayout>
   )
 }
 

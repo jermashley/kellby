@@ -14,6 +14,9 @@ export const useUserQuery = ({ config = {} } = {}) =>
 
     select: ({ data }) => data,
 
+    refetchIntervalInBackground: false,
+    refetchOnWindowFocus: false,
+    refetchInterval: false,
     retry: false,
 
     ...config,

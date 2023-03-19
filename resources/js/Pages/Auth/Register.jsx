@@ -1,6 +1,6 @@
 import { useRegisterUserForm } from '@Hooks/Forms/Auth'
 import { useRegisterUserMutation } from '@Hooks/Mutations/Auth'
-import DefaultLayout from '@Layouts/DefaultLayout'
+import AuthenticatedLayout from '@Layouts/AuthenticatedLayout'
 import { Button, Card, Flex, PasswordInput, TextInput } from '@mantine/core'
 
 const RegisterPage = () => {
@@ -11,7 +11,7 @@ const RegisterPage = () => {
   const registerUserForm = useRegisterUserForm()
 
   return (
-    <DefaultLayout>
+    <AuthenticatedLayout>
       <>
         <h1>Register here</h1>
 
@@ -72,7 +72,7 @@ const RegisterPage = () => {
           </form>
         </Card>
       </>
-    </DefaultLayout>
+    </AuthenticatedLayout>
   )
 }
 

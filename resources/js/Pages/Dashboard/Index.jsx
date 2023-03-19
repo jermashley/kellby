@@ -1,12 +1,12 @@
-import DefaultLayout from '@Layouts/DefaultLayout'
+import AuthenticatedLayout from '@Layouts/AuthenticatedLayout'
 
 const DashboardIndex = () => {
   return (
-    <DefaultLayout>
+    <AuthenticatedLayout>
       <div className="min-h-screen w-full">
         <p className="text-lg text-zinc-700">Dashboard</p>
       </div>
-    </DefaultLayout>
+    </AuthenticatedLayout>
   )
 }
 
