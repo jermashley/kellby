@@ -1,17 +1,24 @@
+import { useLogoutMutation } from '@Hooks/Mutations/Auth'
+import { useUserQuery } from '@Hooks/Queries/user'
 import DefaultLayout from '@Layouts/DefaultLayout'
 import { Button } from '@mantine/core'
 import axios from 'axios'
 
 const Home = () => {
+  const user = useUserQuery()
+  const logout = useLogoutMutation()
+
   return (
     <DefaultLayout>
       <p className="text-lg text-zinc-700">Hello</p>
       <Button
         onClick={() =>
-          axios.post(`https://local.kellby.me/auth/login`, {
-            email: `jane.doe@email.com`,
-            password: `password`,
-          })
+          axios
+            .post(`https://local.kellby.me/auth/login`, {
+              email: `jane.doe@email.com`,
+              password: `password`,
+            })
+            .then(() => user.refetch())
         }
       >
         Log in
@@ -27,9 +34,7 @@ const Home = () => {
         Get User
       </Button>
 
-      <Button onClick={() => axios.post(`https://local.kellby.me/auth/logout`)}>
-        Log out
-      </Button>
+      <Button onClick={() => logout.mutate()}>Log out</Button>
     </DefaultLayout>
   )
 }
