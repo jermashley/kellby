@@ -21,7 +21,7 @@ const LoginPage = () => {
 
   return (
     <GuestLayout>
-      <Center mt={`4rem`}>
+      <Center mt="4rem">
         <Card shadow="md" padding="lg" radius="md" maw="32rem" w={`100%`}>
           <Title order={1} mb={`2rem`}>
             Log in
@@ -44,6 +44,7 @@ const LoginPage = () => {
               <PasswordInput
                 withAsterisk
                 label="Password"
+                placeholder="••••••••••••"
                 {...loginForm.getInputProps('password')}
               />
 
@@ -55,8 +56,8 @@ const LoginPage = () => {
               </Flex>
 
               <Button
-                variant="light"
-                color="blue"
+                variant="default"
+                size="md"
                 fullWidth
                 mt="md"
                 radius="md"

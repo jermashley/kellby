@@ -1,12 +1,13 @@
-import { useLogoutMutation } from '@Hooks/Mutations/Auth'
-import { useUserQuery } from '@Hooks/Queries/user'
-import AuthenticatedLayout from '@Layouts/AuthenticatedLayout'
+import GuestLayout from '@Layouts/GuestLayout'
+import { Title } from '@mantine/core'
 
 const Home = () => {
   return (
-    <AuthenticatedLayout>
-      <p className="text-lg text-zinc-700">Hello</p>
-    </AuthenticatedLayout>
+    <GuestLayout>
+      <Title order={1} align="center">
+        Kellby
+      </Title>
+    </GuestLayout>
   )
 }
 

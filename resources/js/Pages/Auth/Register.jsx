@@ -1,7 +1,15 @@
 import { useRegisterUserForm } from '@Hooks/Forms/Auth'
 import { useRegisterUserMutation } from '@Hooks/Mutations/Auth'
-import AuthenticatedLayout from '@Layouts/AuthenticatedLayout'
-import { Button, Card, Flex, PasswordInput, TextInput } from '@mantine/core'
+import GuestLayout from '@Layouts/GuestLayout'
+import {
+  Button,
+  Card,
+  Center,
+  Flex,
+  PasswordInput,
+  TextInput,
+  Title,
+} from '@mantine/core'
 
 const RegisterPage = () => {
   const registerUser = useRegisterUserMutation({
@@ -11,17 +19,19 @@ const RegisterPage = () => {
   const registerUserForm = useRegisterUserForm()
 
   return (
-    <AuthenticatedLayout>
-      <>
-        <h1>Register here</h1>
+    <GuestLayout>
+      <Center mt="4rem">
+        <Card shadow="md" padding="lg" radius="md" maw="32rem" w={`100%`}>
+          <Title order={1} mb={`2rem`}>
+            Create an account
+          </Title>
 
-        <Card shadow="md" padding="lg" radius="md" maw="32rem">
           <form
             onSubmit={registerUserForm.onSubmit((values) =>
               registerUser.mutate({ formData: values }),
             )}
           >
-            <Flex direction="column" justify="stretch" gap="sm">
+            <Flex direction="column" justify="stretch" gap="md">
               <TextInput
                 withAsterisk
                 label="First name"
@@ -49,18 +59,20 @@ const RegisterPage = () => {
               <PasswordInput
                 withAsterisk
                 label="Password"
+                placeholder="••••••••••••"
                 {...registerUserForm.getInputProps('password')}
               />
 
               <PasswordInput
                 withAsterisk
                 label="Password"
+                placeholder="••••••••••••"
                 {...registerUserForm.getInputProps('password_confirmation')}
               />
 
               <Button
-                variant="light"
-                color="blue"
+                variant="default"
+                size="md"
                 fullWidth
                 mt="md"
                 radius="md"
@@ -71,8 +83,8 @@ const RegisterPage = () => {
             </Flex>
           </form>
         </Card>
-      </>
-    </AuthenticatedLayout>
+      </Center>
+    </GuestLayout>
   )
 }
 

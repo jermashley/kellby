@@ -1,4 +1,5 @@
 import { router } from '@inertiajs/react'
+import { notifications } from '@mantine/notifications'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
 
@@ -19,6 +20,11 @@ export const useLoginMutation = ({ config = {} } = {}) => {
     onSuccess: () => {
       queryClient.invalidateQueries([`user`])
       router.visit(`/dashboard`)
+      notifications.show({
+        title: `Successfully logged in`,
+        message: `Welcome back! 😀`,
+        color: `green`,
+      })
     },
 
     ...config,
