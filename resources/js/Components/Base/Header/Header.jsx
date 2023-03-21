@@ -1,12 +1,7 @@
+import { NavigationDropdown } from '@Components/Feature/User'
 import { NavigationContext } from '@Contexts/NavigationContextProvider'
-import {
-  faCog,
-  faMemo,
-  faSignOut,
-  faUser,
-} from '@fortawesome/pro-duotone-svg-icons'
+import { faMemo, faSignIn } from '@fortawesome/pro-duotone-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useLogoutMutation } from '@Hooks/Mutations/Auth'
 import { useUserQuery } from '@Hooks/Queries/user'
 import { Link } from '@inertiajs/react'
 import {
@@ -15,7 +10,6 @@ import {
   Flex,
   Header as AppHeader,
   MediaQuery,
-  Menu,
   Text,
   useMantineTheme,
 } from '@mantine/core'
@@ -24,7 +18,6 @@ import { useContext } from 'react'
 export const Header = () => {
   const user = useUserQuery()
   const navigation = useContext(NavigationContext)
-  const logout = useLogoutMutation()
   const theme = useMantineTheme()
 
   return (
@@ -45,43 +38,19 @@ export const Header = () => {
       </Link>
 
       <Flex direction={`row`} justify={`flex-end`} align={`center`} gap={4}>
-        {user.data ? (
-          <Menu>
-            <Menu.Target>
-              <Button>
-                <FontAwesomeIcon icon={faUser} fixedWidth />
-              </Button>
-            </Menu.Target>
-
-            <Menu.Dropdown>
-              <Link href="/user">
-                <Menu.Item icon={<FontAwesomeIcon icon={faCog} fixedWidth />}>
-                  Account Settings
-                </Menu.Item>
-              </Link>
-
-              <Menu.Divider />
-
-              <Menu.Item
-                icon={<FontAwesomeIcon icon={faSignOut} fixedWidth />}
-                onClick={() => logout.mutate()}
-              >
-                Sign out
-              </Menu.Item>
-            </Menu.Dropdown>
-          </Menu>
-        ) : null}
+        {user.data ? <NavigationDropdown /> : null}
 
         {user.isError && !user.data && !user.isLoading && !user.isFetching ? (
-          <>
-            <Link href={`/register`}>
-              <Text style={{ textDecoration: `underline` }}>Register</Text>
-            </Link>
-            /
-            <Link href={`/login`}>
-              <Text style={{ textDecoration: `underline` }}>Login</Text>
-            </Link>
-          </>
+          <Link href={`/login`}>
+            <Button
+              component="div"
+              variant="default"
+              size="xs"
+              leftIcon={<FontAwesomeIcon icon={faSignIn} fixedWidth />}
+            >
+              Log in
+            </Button>
+          </Link>
         ) : null}
 
         <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
