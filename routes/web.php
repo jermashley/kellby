@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -15,19 +16,29 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Home/Index');
+    if (Auth::user()) {
+        return redirect('dashboard');
+    }
+
+    return Inertia::render('Public/Home/Index');
 });
 
 Route::get('/register', function () {
-    return Inertia::render('Auth/Register');
+    return Inertia::render('Public/Auth/Register');
 })->middleware('guest')->name('register');
 
 Route::get('/login', function () {
-    return Inertia::render('Auth/Login');
+    return Inertia::render('Public/Auth/Login');
 })->middleware('guest')->name('login');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard/Index');
 })->middleware('auth')->name('dashboard');
+
+Route::prefix('user')->as('user.')->group(function () {
+    Route::get('/', function () {
+        return Inertia::render('User/Settings');
+    });
+});
 
 require __DIR__.'/auth.php';

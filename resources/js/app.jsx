@@ -2,6 +2,8 @@ import { createInertiaApp } from '@inertiajs/react'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { AppContextProvider } from '@Contexts/AppContextProvider'
+import AuthenticatedLayout from '@Layouts/AuthenticatedLayout'
+import GuestLayout from '@Layouts/GuestLayout'
 
 createInertiaApp({
   resolve: (name) => {
@@ -10,8 +12,16 @@ createInertiaApp({
     let page = pages[`./Pages/${name}.jsx`]
 
     page.default.layout = name.startsWith('Public/')
-      ? undefined
-      : (page) => <AppContextProvider children={page} />
+      ? (page) => (
+          <AppContextProvider>
+            <GuestLayout>{page}</GuestLayout>
+          </AppContextProvider>
+        )
+      : (page) => (
+          <AppContextProvider>
+            <AuthenticatedLayout>{page}</AuthenticatedLayout>
+          </AppContextProvider>
+        )
 
     return page
   },

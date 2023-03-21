@@ -1,5 +1,4 @@
 import { AppShell, useMantineTheme } from '@mantine/core'
-import { Navigation } from '@Components/Base/Navigation'
 
 import { Header } from '@Components/Base/Header'
 import { Footer } from '@Components/Base/Footer'

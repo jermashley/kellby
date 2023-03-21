@@ -54,9 +54,11 @@ export const Header = () => {
             </Menu.Target>
 
             <Menu.Dropdown>
-              <Menu.Item icon={<FontAwesomeIcon icon={faCog} fixedWidth />}>
-                Account Settings
-              </Menu.Item>
+              <Link href="/user">
+                <Menu.Item icon={<FontAwesomeIcon icon={faCog} fixedWidth />}>
+                  Account Settings
+                </Menu.Item>
+              </Link>
 
               <Menu.Divider />
 
@@ -68,7 +70,9 @@ export const Header = () => {
               </Menu.Item>
             </Menu.Dropdown>
           </Menu>
-        ) : (
+        ) : null}
+
+        {user.isError && !user.data && !user.isLoading && !user.isFetching ? (
           <>
             <Link href={`/register`}>
               <Text style={{ textDecoration: `underline` }}>Register</Text>
@@ -78,7 +82,7 @@ export const Header = () => {
               <Text style={{ textDecoration: `underline` }}>Login</Text>
             </Link>
           </>
-        )}
+        ) : null}
 
         <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
           <Burger
