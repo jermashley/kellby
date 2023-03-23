@@ -19,7 +19,7 @@ export const AppContextProvider = ({ children }) => {
     >
       <QueryClientProvider client={queryClient}>
         {[`local`, `qa`].includes(import.meta.env.VITE_APP_ENV) ? (
-          <ReactQueryDevtools initialIsOpen={false} position="bottom-left" />
+          <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
         ) : null}
         <ComposeComponents components={[...providers]}>
           <Notifications />

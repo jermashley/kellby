@@ -1,4 +1,4 @@
-import { AppShell, useMantineTheme } from '@mantine/core'
+import { AppShell, MediaQuery, useMantineTheme } from '@mantine/core'
 import { Navigation } from '@Components/Base/Navigation'
 
 import { Header } from '@Components/Base/Header'
@@ -19,8 +19,7 @@ const AuthenticatedLayout = ({ children }) => {
       }}
       header={<Header />}
       navbar={<Navigation />}
-      navbarOffsetBreakpoint="sm"
-      footer={<Footer />}
+      // footer={<Footer />}
     >
       {children}
     </AppShell>

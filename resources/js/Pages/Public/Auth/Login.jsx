@@ -37,6 +37,7 @@ const LoginPage = () => {
               label="Email"
               placeholder="jane.doe@email.com"
               type="email"
+              autoFocus
               {...loginForm.getInputProps('email')}
             />
 
