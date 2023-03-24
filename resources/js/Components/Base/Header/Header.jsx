@@ -1,6 +1,6 @@
 import { NavigationDropdown } from '@Components/Feature/User'
 import { NavigationContext } from '@Contexts/NavigationContextProvider'
-import { faMemo, faSignIn } from '@fortawesome/pro-duotone-svg-icons'
+import { faMemo, faPlus, faSignIn } from '@fortawesome/pro-duotone-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useUserQuery } from '@Hooks/Queries/user'
 import { Link } from '@inertiajs/react'
@@ -22,12 +22,12 @@ export const Header = () => {
   const theme = useMantineTheme()
 
   return (
-    <AppHeader height={{ base: 50, md: 70 }} p="md">
-      <Flex direction="row" justify="space-between" align="center">
+    <AppHeader height={60} p="md">
+      <Flex direction="row" justify="space-between" align="center" h="100%">
         <Link href={`/`}>
-          <Title order={2} weight="normal">
+          <Text size="xl" weight="normal">
             <FontAwesomeIcon icon={faMemo} fixedWidth /> Kellby
-          </Title>
+          </Text>
         </Link>
 
         <Flex direction={`row`} justify={`flex-end`} align={`center`} gap={4}>
@@ -40,6 +40,19 @@ export const Header = () => {
                 leftIcon={<FontAwesomeIcon icon={faSignIn} fixedWidth />}
               >
                 Log in
+              </Button>
+            </Link>
+          ) : null}
+
+          {user.data ? (
+            <Link href={`/log/add`}>
+              <Button
+                component="div"
+                variant="default"
+                size="xs"
+                leftIcon={<FontAwesomeIcon icon={faPlus} fixedWidth />}
+              >
+                New Log
               </Button>
             </Link>
           ) : null}

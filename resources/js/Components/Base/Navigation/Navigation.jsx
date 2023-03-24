@@ -1,7 +1,10 @@
 import { NavigationContext } from '@Contexts/NavigationContextProvider'
 import {
+  faAngleRight,
   faAngleUp,
+  faBooks,
   faMemo,
+  faScreenUsers,
   faSignOut,
   faSquareKanban,
   faUser,
@@ -14,12 +17,16 @@ import { Link } from '@inertiajs/react'
 import {
   Accordion,
   Avatar,
+  Button,
   Divider,
   Flex,
+  Group,
+  Menu,
   Navbar,
   NavLink,
   Text,
   Title,
+  UnstyledButton,
 } from '@mantine/core'
 import { useContext } from 'react'
 
@@ -44,27 +51,45 @@ export const Navigation = () => {
             component="div"
             label="Dashboard"
             icon={<FontAwesomeIcon icon={faSquareKanban} fixedWidth />}
-            variant="filled"
+            variant="light"
+            color="gray"
             active={currentRouteBeginsWith(`/dashboard`)}
+            style={{ borderRadius: `0.25rem` }}
+          />
+        </Link>
+
+        <Link href="/students">
+          <NavLink
+            component="div"
+            label="Students"
+            icon={<FontAwesomeIcon icon={faScreenUsers} fixedWidth />}
+            variant="light"
+            color="gray"
+            active={currentRouteBeginsWith(`/students`)}
+            style={{ borderRadius: `0.25rem` }}
+          />
+        </Link>
+
+        <Link href="/subjects">
+          <NavLink
+            component="div"
+            label="Subjects"
+            icon={<FontAwesomeIcon icon={faBooks} fixedWidth />}
+            variant="light"
+            color="gray"
+            active={currentRouteBeginsWith(`/subjects`)}
             style={{ borderRadius: `0.25rem` }}
           />
         </Link>
       </Navbar.Section>
 
       <Navbar.Section>
-        <Accordion variant="separated">
-          <Accordion.Item value="user-panel">
-            <Accordion.Control
-              chevron={<FontAwesomeIcon icon={faAngleUp} fixedWidth />}
-            >
-              <Flex
-                direction="row"
-                justify="flex-start"
-                align="center"
-                gap="md"
-              >
+        <Menu width="target">
+          <Menu.Target>
+            <UnstyledButton px="md" py="sm" w="100%">
+              <Group position="left" spacing="sm">
                 {user.data?.avatar ? (
-                  <Avatar src={user.data?.avatar} radius={100} />
+                  <Avatar src={user.data?.avatar} radius="md" size="md" />
                 ) : null}
 
                 <Flex
@@ -72,7 +97,7 @@ export const Navigation = () => {
                   justify="flex-start"
                   align="flex-start"
                 >
-                  <Text size="sm">
+                  <Text size="sm" weight="bold">
                     {user.data?.first_name} {user.data?.last_name}
                   </Text>
 
@@ -80,32 +105,27 @@ export const Navigation = () => {
                     {user.data?.email}
                   </Text>
                 </Flex>
-              </Flex>
-            </Accordion.Control>
+              </Group>
+            </UnstyledButton>
+          </Menu.Target>
 
-            <Accordion.Panel>
-              <Link href={`/profile`}>
-                <NavLink
-                  label="Profile"
-                  icon={<FontAwesomeIcon icon={faUser} fixedWidth />}
-                  component="div"
-                  variant="subtle"
-                  style={{ borderRadius: `0.25rem` }}
-                />
-              </Link>
+          <Menu.Dropdown>
+            <Link href={`/user/profile`}>
+              <Menu.Item icon={<FontAwesomeIcon icon={faUser} fixedWidth />}>
+                Profile
+              </Menu.Item>
+            </Link>
 
-              <Divider my="xs" />
+            <Divider my="xs" />
 
-              <NavLink
-                label="Log out"
-                icon={<FontAwesomeIcon icon={faSignOut} fixedWidth />}
-                variant="subtle"
-                style={{ borderRadius: `0.25rem` }}
-                onClick={() => logout.mutate()}
-              />
-            </Accordion.Panel>
-          </Accordion.Item>
-        </Accordion>
+            <Menu.Item
+              icon={<FontAwesomeIcon icon={faSignOut} fixedWidth />}
+              onClick={() => logout.mutate()}
+            >
+              Log out
+            </Menu.Item>
+          </Menu.Dropdown>
+        </Menu>
       </Navbar.Section>
     </Navbar>
   )

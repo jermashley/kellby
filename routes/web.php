@@ -36,8 +36,8 @@ Route::get('/dashboard', function () {
 })->middleware('auth')->name('dashboard');
 
 Route::prefix('user')->as('user.')->group(function () {
-    Route::get('/', function () {
-        return Inertia::render('User/Settings');
+    Route::get('/profile', function () {
+        return Inertia::render('User/Profile');
     });
 });
 
