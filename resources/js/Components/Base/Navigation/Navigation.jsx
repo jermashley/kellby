@@ -4,6 +4,7 @@ import {
   faAngleUp,
   faBooks,
   faMemo,
+  faPlus,
   faScreenUsers,
   faSignOut,
   faSquareKanban,
@@ -45,13 +46,29 @@ export const Navigation = () => {
       hidden={!navigation.isOpen}
       width={{ sm: 320 }}
     >
+      <Navbar.Section>
+        <Link href={`/log/add`}>
+          <Button
+            component="div"
+            variant="filled"
+            color="gray"
+            leftIcon={<FontAwesomeIcon icon={faPlus} fixedWidth />}
+            fullWidth
+          >
+            New Log
+          </Button>
+        </Link>
+      </Navbar.Section>
+
+      <Divider my="md" />
+
       <Navbar.Section grow>
         <Link href="/dashboard">
           <NavLink
             component="div"
             label="Dashboard"
             icon={<FontAwesomeIcon icon={faSquareKanban} fixedWidth />}
-            variant="light"
+            variant="filled"
             color="gray"
             active={currentRouteBeginsWith(`/dashboard`)}
             style={{ borderRadius: `0.25rem` }}
@@ -63,7 +80,7 @@ export const Navigation = () => {
             component="div"
             label="Students"
             icon={<FontAwesomeIcon icon={faScreenUsers} fixedWidth />}
-            variant="light"
+            variant="filled"
             color="gray"
             active={currentRouteBeginsWith(`/students`)}
             style={{ borderRadius: `0.25rem` }}
@@ -75,7 +92,7 @@ export const Navigation = () => {
             component="div"
             label="Subjects"
             icon={<FontAwesomeIcon icon={faBooks} fixedWidth />}
-            variant="light"
+            variant="filled"
             color="gray"
             active={currentRouteBeginsWith(`/subjects`)}
             style={{ borderRadius: `0.25rem` }}

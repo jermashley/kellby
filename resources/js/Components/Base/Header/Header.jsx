@@ -44,19 +44,6 @@ export const Header = () => {
             </Link>
           ) : null}
 
-          {user.data ? (
-            <Link href={`/log/add`}>
-              <Button
-                component="div"
-                variant="default"
-                size="xs"
-                leftIcon={<FontAwesomeIcon icon={faPlus} fixedWidth />}
-              >
-                New Log
-              </Button>
-            </Link>
-          ) : null}
-
           <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
             <Burger
               opened={navigation.isOpen}
