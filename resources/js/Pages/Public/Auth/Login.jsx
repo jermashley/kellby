@@ -13,9 +13,7 @@ import {
 } from '@mantine/core'
 
 const LoginPage = () => {
-  const login = useLoginMutation({
-    onSuccess: (data) => console.log(data),
-  })
+  const login = useLoginMutation()
 
   const loginForm = useLoginForm()
 

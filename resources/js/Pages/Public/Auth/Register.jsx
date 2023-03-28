@@ -12,9 +12,7 @@ import {
 } from '@mantine/core'
 
 const RegisterPage = () => {
-  const registerUser = useRegisterUserMutation({
-    onSuccess: (data) => console.log(data),
-  })
+  const registerUser = useRegisterUserMutation()
 
   const registerUserForm = useRegisterUserForm()
 
