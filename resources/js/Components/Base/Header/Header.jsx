@@ -15,11 +15,15 @@ import {
   useMantineTheme,
 } from '@mantine/core'
 import { useContext } from 'react'
+import { useRouteIsCurrent } from '@Hooks/useRouteIsCurrent'
 
 export const Header = () => {
   const user = useUserQuery()
   const navigation = useContext(NavigationContext)
   const theme = useMantineTheme()
+  const { currentRouteIs } = useRouteIsCurrent()
+
+  const showLogin = user.isError && !user.data && !currentRouteIs('/login')
 
   return (
     <AppHeader height={60} p="md">
@@ -31,7 +35,7 @@ export const Header = () => {
         </Link>
 
         <Flex direction={`row`} justify={`flex-end`} align={`center`} gap={4}>
-          {user.isError && !user.data && !user.isLoading && !user.isFetching ? (
+          {showLogin ? (
             <Link href={`/login`}>
               <Button
                 component="div"
