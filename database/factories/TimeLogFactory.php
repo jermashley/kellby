@@ -17,7 +17,7 @@ class TimeLogFactory extends Factory
     public function definition(): array
     {
         return [
-            'duration' => fake()->time($format = 'H:i:s', $max = 7200),
+            'duration' => fake()->numberBetween(1800, 5400),
         ];
     }
 }

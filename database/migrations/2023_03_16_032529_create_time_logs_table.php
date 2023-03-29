@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('time_logs', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid');
-            $table->time('duration');
+            $table->integer('duration')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
