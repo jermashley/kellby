@@ -1,9 +1,6 @@
 import { NavigationContext } from '@Contexts/NavigationContextProvider'
 import {
-  faAngleRight,
-  faAngleUp,
   faBooks,
-  faMemo,
   faPlus,
   faScreenUsers,
   faSignOut,
@@ -16,7 +13,6 @@ import { useUserQuery } from '@Hooks/Queries/user'
 import { useRouteIsCurrent } from '@Hooks/useRouteIsCurrent'
 import { Link } from '@inertiajs/react'
 import {
-  Accordion,
   Avatar,
   Button,
   Divider,
@@ -26,7 +22,6 @@ import {
   Navbar,
   NavLink,
   Text,
-  Title,
   UnstyledButton,
 } from '@mantine/core'
 import { useContext } from 'react'

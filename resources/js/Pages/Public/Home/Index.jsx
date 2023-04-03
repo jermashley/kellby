@@ -1,7 +1,6 @@
-import GuestLayout from '@Layouts/GuestLayout'
 import { Title } from '@mantine/core'
 
-const Home = ({ props }) => {
+const Home = () => {
   return (
     <Title order={1} align="center">
       Kellby

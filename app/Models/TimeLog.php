@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\HasUuid;
+use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,6 +17,21 @@ class TimeLog extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'duration',
+        'seconds',
     ];
+
+    /**
+     * The attributes that should be automatically included in the model.
+     */
+    protected $appends = [
+        'milliseconds',
+    ];
+
+    /**
+     * Convert seconds to milliseconds.
+     */
+    public function getMillisecondsAttribute(): int
+    {
+        return $this->seconds * 1000;
+    }
 }

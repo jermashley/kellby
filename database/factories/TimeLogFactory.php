@@ -17,7 +17,7 @@ class TimeLogFactory extends Factory
     public function definition(): array
     {
         return [
-            'duration' => fake()->numberBetween(1800, 5400),
+            'seconds' => fake()->numberBetween(1800, 5400),
         ];
     }
 }

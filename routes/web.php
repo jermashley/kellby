@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\TimeLog;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -38,7 +39,9 @@ Route::get('/dashboard', function () {
 
 Route::prefix('user')->middleware('auth')->as('user.')->group(function () {
     Route::get('/profile', function () {
-        return Inertia::render('User/Profile');
+        return Inertia::render('User/Profile', [
+            'log' => TimeLog::first(),
+        ]);
     });
 });
 
