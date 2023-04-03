@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\TeamController;
 use App\Models\TimeLog;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -34,15 +34,18 @@ Route::get('/login', function () {
 })->middleware('guest')->name('login');
 
 Route::get('/dashboard', function () {
+    dd(Auth::user()->team);
     return Inertia::render('Dashboard/Index');
 })->middleware('auth')->name('dashboard');
 
 Route::prefix('user')->middleware('auth')->as('user.')->group(function () {
     Route::get('/profile', function () {
-        return Inertia::render('User/Profile', [
+        return Inertia::render('User/Profile/Index', [
             'log' => TimeLog::first(),
         ]);
     });
 });
+
+Route::resource('team', TeamController::class)->middleware('auth');
 
 require __DIR__.'/auth.php';

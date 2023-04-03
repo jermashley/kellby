@@ -2,7 +2,7 @@ import { useDayJs } from '@Hooks/useDayJs'
 import { Flex, NumberInput } from '@mantine/core'
 import { useEffect } from 'react'
 
-const UserProfilePage = ({ log }) => {
+const UserProfileIndexPage = ({ log }) => {
   const dayjs = useDayJs()
 
   useEffect(() => {
@@ -16,4 +16,4 @@ const UserProfilePage = ({ log }) => {
   )
 }
 
-export default UserProfilePage
+export default UserProfileIndexPage
