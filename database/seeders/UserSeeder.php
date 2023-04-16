@@ -14,6 +14,8 @@ class UserSeeder extends Seeder
     {
         User::factory(5)->create();
 
-        User::factory(10)->withTeam()->create();
+        User::factory(10)->withOwnedTeam()->create();
+
+        User::factory(25)->partOfTeam()->create();
     }
 }

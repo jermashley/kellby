@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Team;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -45,7 +46,17 @@ class UserFactory extends Factory
       /**
        * Attach the user to a team.
        */
-      public function withTeam(): static
+      public function withOwnedTeam(): static
+      {
+          return $this->afterCreating(function (User $user) {
+              $user->ownedTeams()->attach($this->faker->unique()->numberBetween(1, 10));
+          });
+      }
+
+      /**
+       * Attach the user to a team.
+       */
+      public function partOfTeam(): static
       {
           return $this->afterCreating(function (User $user) {
               $user->teams()->attach(Team::inRandomOrder()->first()->id ?? Team::factory()->create()->id);
