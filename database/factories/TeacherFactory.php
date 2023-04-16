@@ -26,6 +26,7 @@ class TeacherFactory extends Factory
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
+            'type' => 'teacher',
             'avatar' => fake()->imageUrl(512, 512, 'cats'),
         ];
     }
