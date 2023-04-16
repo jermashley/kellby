@@ -1,6 +1,5 @@
 import { useRegisterUserForm } from '@Hooks/Forms/Auth'
 import { useRegisterUserMutation } from '@Hooks/Mutations/Auth'
-import GuestLayout from '@Layouts/GuestLayout'
 import {
   Button,
   Card,
@@ -34,7 +33,7 @@ const RegisterPage = () => {
               label="First name"
               placeholder="Jane"
               type="text"
-              {...registerUserForm.getInputProps('first_name')}
+              {...registerUserForm.getInputProps(`first_name`)}
             />
 
             <TextInput
@@ -42,7 +41,7 @@ const RegisterPage = () => {
               label="Last name"
               placeholder="Doe"
               type="text"
-              {...registerUserForm.getInputProps('last_name')}
+              {...registerUserForm.getInputProps(`last_name`)}
             />
 
             <TextInput
@@ -50,21 +49,21 @@ const RegisterPage = () => {
               label="Email"
               placeholder="jane.doe@email.com"
               type="email"
-              {...registerUserForm.getInputProps('email')}
+              {...registerUserForm.getInputProps(`email`)}
             />
 
             <PasswordInput
               withAsterisk
               label="Password"
               placeholder="••••••••••••"
-              {...registerUserForm.getInputProps('password')}
+              {...registerUserForm.getInputProps(`password`)}
             />
 
             <PasswordInput
               withAsterisk
-              label="Password"
+              label="Confirm Password"
               placeholder="••••••••••••"
-              {...registerUserForm.getInputProps('password_confirmation')}
+              {...registerUserForm.getInputProps(`password_confirmation`)}
             />
 
             <Button

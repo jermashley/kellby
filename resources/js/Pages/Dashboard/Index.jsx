@@ -1,6 +1,3 @@
-import AuthenticatedLayout from '@Layouts/AuthenticatedLayout'
-import { useUserQuery } from '@Hooks/Queries/user'
-
 const DashboardIndex = () => {
   return (
     <div className="min-h-screen w-full">

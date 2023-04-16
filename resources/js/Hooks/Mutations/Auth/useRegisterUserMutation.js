@@ -20,7 +20,8 @@ export const useRegisterUserMutation = ({ config = {} } = {}) =>
         message: `Welcome to Kellby!`,
         color: `green`,
       })
-      router.visit(`/dashboard`)
+
+      router.visit(`/team/create`)
     },
 
     ...config,

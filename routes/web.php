@@ -33,11 +33,12 @@ Route::get('/login', function () {
     return Inertia::render('Public/Auth/Login');
 })->middleware('guest')->name('login');
 
+// Dashboard route
 Route::get('/dashboard', function () {
-    dd(Auth::user()->team);
     return Inertia::render('Dashboard/Index');
 })->middleware('auth')->name('dashboard');
 
+// User routes
 Route::prefix('user')->middleware('auth')->as('user.')->group(function () {
     Route::get('/profile', function () {
         return Inertia::render('User/Profile/Index', [
@@ -46,6 +47,7 @@ Route::prefix('user')->middleware('auth')->as('user.')->group(function () {
     });
 });
 
+// Team routes
 Route::resource('team', TeamController::class)->middleware('auth');
 
 require __DIR__.'/auth.php';

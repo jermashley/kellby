@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +18,6 @@ class TeamFactory extends Factory
     {
         return [
             'name' => $this->faker->company,
-            'user_id' => User::pluck('id')->random(),
         ];
     }
 }

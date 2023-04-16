@@ -1,9 +1,9 @@
 <?php
-# app/Http/Controllers/CaddyController.php
+
+// app/Http/Controllers/CaddyController.php
 
 namespace App\Http\Controllers;
 
-use App\Store;
 use Illuminate\Http\Request;
 
 class CaddyController extends Controller

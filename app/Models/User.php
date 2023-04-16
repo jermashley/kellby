@@ -6,7 +6,7 @@ namespace App\Models;
 
 use App\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -26,7 +26,7 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
-        'avatar'
+        'avatar',
     ];
 
     /**
@@ -48,8 +48,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function team(): HasOne
+    /**
+     * Get the team that owns the User
+     */
+    public function ownedTeams(): BelongsToMany
     {
-        return $this->hasOne(Team::class);
+        return $this->belongsToMany(Team::class, 'team_owner');
     }
+
+      /**
+       * Get the teams that the User belongs to
+       */
+      public function teams(): BelongsToMany
+      {
+          return $this->belongsToMany(Team::class, 'team_member');
+      }
 }

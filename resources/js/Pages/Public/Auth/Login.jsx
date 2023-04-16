@@ -35,21 +35,22 @@ const LoginPage = () => {
               label="Email"
               placeholder="jane.doe@email.com"
               type="email"
+              // eslint-disable-next-line jsx-a11y/no-autofocus
               autoFocus
-              {...loginForm.getInputProps('email')}
+              {...loginForm.getInputProps(`email`)}
             />
 
             <PasswordInput
               withAsterisk
               label="Password"
               placeholder="••••••••••••"
-              {...loginForm.getInputProps('password')}
+              {...loginForm.getInputProps(`password`)}
             />
 
             <Flex direction={`row`} justify={`flex-end`} align={`center`}>
               <Checkbox
                 label="Remember me"
-                {...loginForm.getInputProps('remember')}
+                {...loginForm.getInputProps(`remember`)}
               />
             </Flex>
 

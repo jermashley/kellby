@@ -2,7 +2,7 @@ import { useForm, yupResolver } from '@mantine/form'
 import * as Yup from 'yup'
 
 const registerUserSchema = Yup.object().shape({
-  first_name: Yup.string().required('First name is required'),
+  first_name: Yup.string().required(`First name is required`),
   last_name: Yup.string().required(`Last name is required`),
   email: Yup.string()
     .matches(
@@ -11,8 +11,8 @@ const registerUserSchema = Yup.object().shape({
     .required(`Email is required`),
   password: Yup.string().required(`Password is required`),
   password_confirmation: Yup.string().oneOf(
-    [Yup.ref('password'), null],
-    'Passwords must match',
+    [Yup.ref(`password`), null],
+    `Passwords must match`,
   ),
 })
 
