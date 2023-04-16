@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('time_logs', function (Blueprint $table) {
-            $table->id();
-            $table->uuid();
-            $table->integer('seconds')->nullable();
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreignId('grade_id')->nullable()->after('avatar');
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('time_logs');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 };

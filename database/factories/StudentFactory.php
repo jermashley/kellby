@@ -2,14 +2,17 @@
 
 namespace Database\Factories;
 
+use App\Models\Grade;
+use App\Models\Student;
+use App\Models\Team;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Student>
  */
-class UserFactory extends Factory
+class StudentFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -30,14 +33,22 @@ class UserFactory extends Factory
     }
 
     /**
-     * Indicate that the model's email address should be unverified.
-     *
-     * @return $this
+     * Attach the user to a team.
      */
-    public function unverified(): static
+    public function onTeam(): static
+    {
+        return $this->afterCreating(function (Student $student) {
+            $student->teams()->attach(Team::inRandomOrder()->first()->id ?? Team::factory()->create()->id);
+        });
+    }
+
+    /**
+     * With a grade.
+     */
+    public function withGrade(): static
     {
         return $this->state(fn (array $attributes) => [
-            'email_verified_at' => null,
+            'grade_id' => Grade::inRandomOrder()->first()->id,
         ]);
     }
 }

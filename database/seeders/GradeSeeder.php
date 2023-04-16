@@ -2,16 +2,18 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\Grade;
 use Illuminate\Database\Seeder;
 
-class UserSeeder extends Seeder
+class GradeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        User::factory(5)->create();
+        foreach (Grade::$grades as $grade) {
+            Grade::create($grade);
+        }
     }
 }
