@@ -9,6 +9,7 @@ const registerUserSchema = Yup.object().shape({
       /^(([^<>()\[\]\\.,;:\s@"]+(.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/,
     )
     .required(`Email is required`),
+  type: Yup.string().oneOf([`teacher`, `student`]).required(`Type is required`),
   password: Yup.string().required(`Password is required`),
   password_confirmation: Yup.string().oneOf(
     [Yup.ref(`password`), null],
@@ -22,6 +23,7 @@ export const useRegisterUserForm = ({ config = {} } = {}) =>
       first_name: ``,
       last_name: ``,
       email: ``,
+      type: ``,
       password: ``,
       password_confirmation: ``,
     },

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\UserTypesController;
 use App\Models\TimeLog;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -46,6 +47,8 @@ Route::prefix('user')->middleware('auth')->as('user.')->group(function () {
         ]);
     });
 });
+
+Route::get('/user/types', UserTypesController::class)->middleware('guest')->name('user.types');
 
 // Team routes
 Route::resource('team', TeamController::class)->middleware('auth');

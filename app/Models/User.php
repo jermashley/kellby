@@ -15,6 +15,11 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasUuid, HasRoles;
 
+    public static $types = [
+        ['label' => 'Teacher', 'value' => 'teacher'],
+        ['label' => 'Student', 'value' => 'student'],
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -25,6 +30,7 @@ class User extends Authenticatable
         'last_name',
         'email',
         'password',
+        'type',
         'avatar',
     ];
 
