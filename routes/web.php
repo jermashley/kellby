@@ -40,7 +40,7 @@ Route::get('/dashboard', function () {
 })->middleware('auth')->name('dashboard');
 
 // User routes
-Route::prefix('User')->middleware('auth')->as('User.')->group(function () {
+Route::prefix('user')->middleware('auth')->as('user.')->group(function () {
     Route::get('/profile', function () {
         return Inertia::render('User/Profile/Index', [
             'log' => TimeLog::first(),
