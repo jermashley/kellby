@@ -1,4 +1,4 @@
-import { useUserQuery } from '@Hooks/Queries/user'
+import { useUserQuery } from '@Hooks/Queries/User'
 import { usePage } from '@inertiajs/react'
 import { createContext } from 'react'
 

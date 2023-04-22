@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTeamRequest;
 use App\Http\Requests\UpdateTeamRequest;
+use App\Models\Teacher;
 use App\Models\Team;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -38,8 +39,11 @@ class TeamController extends Controller
     {
         $team = Team::create([
             'name' => $request->name,
-            'user_id' => Auth::id(),
         ]);
+
+        $teacher = Teacher::find(Auth::id());
+
+        $teacher->teams()->attach($team);
 
         return response()->json([], HttpCodes::HTTP_CREATED);
     }

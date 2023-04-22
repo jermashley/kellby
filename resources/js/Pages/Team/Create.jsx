@@ -1,6 +1,6 @@
 import { useCreateTeamForm } from '@Hooks/Forms/Team/useCreateTeamForm'
 import { useCreateTeamMutation } from '@Hooks/Mutations/Team/useCreateTeamMutation'
-import { useUserQuery } from '@Hooks/Queries/user'
+import { useUserQuery } from '@Hooks/Queries/User'
 import { Button, Card, Center, Flex, TextInput, Title } from '@mantine/core'
 
 const CreateTeamPage = () => {

@@ -2,7 +2,7 @@ import { NavigationDropdown } from '@Components/Feature/User'
 import { NavigationContext } from '@Contexts/NavigationContextProvider'
 import { faMemo, faPlus, faSignIn } from '@fortawesome/pro-duotone-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useUserQuery } from '@Hooks/Queries/user'
+import { useUserQuery } from '@Hooks/Queries/User'
 import { Link } from '@inertiajs/react'
 import {
   Burger,

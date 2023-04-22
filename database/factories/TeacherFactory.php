@@ -32,7 +32,7 @@ class TeacherFactory extends Factory
     }
 
     /**
-     * Attach the user to a team.
+     * Attach the User to a team.
      */
     public function withTeam(): static
     {

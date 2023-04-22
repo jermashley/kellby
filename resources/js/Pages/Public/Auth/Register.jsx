@@ -1,6 +1,6 @@
 import { useRegisterUserForm } from '@Hooks/Forms/Auth'
 import { useRegisterUserMutation } from '@Hooks/Mutations/Auth'
-import { useUserTypes } from '@Hooks/Queries/user'
+import { useUserTypes } from '@Hooks/Queries/User'
 import {
   Button,
   Card,
@@ -54,11 +54,11 @@ const RegisterPage = () => {
               {...registerUserForm.getInputProps(`email`)}
             />
 
-            <Select
-              label="Account Type"
-              data={userTypes.data ?? [``]}
-              placeholder={`Select an account type`}
-            />
+            {/*<Select*/}
+            {/*  label="Account Type"*/}
+            {/*  data={userTypes.data ?? [``]}*/}
+            {/*  placeholder={`Select an account type`}*/}
+            {/*/>*/}
 
             <PasswordInput
               withAsterisk

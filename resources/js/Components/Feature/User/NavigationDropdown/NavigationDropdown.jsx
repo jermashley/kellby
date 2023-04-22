@@ -1,7 +1,7 @@
 import { faCog, faSignOut, faUser } from '@fortawesome/pro-duotone-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useLogoutMutation } from '@Hooks/Mutations/Auth'
-import { useUserQuery } from '@Hooks/Queries/user'
+import { useUserQuery } from '@Hooks/Queries/User'
 import { Link } from '@inertiajs/react'
 import { Button, Flex, Menu } from '@mantine/core'
 

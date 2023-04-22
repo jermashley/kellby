@@ -1,4 +1,4 @@
-// Register user
+// Register User
 export { useRegisterUserMutation } from './useRegisterUserMutation'
 
 // Login

@@ -1,4 +1,4 @@
-// Register user
+// Register User
 export { useRegisterUserForm } from './useRegisterUserForm'
 
 // Login

@@ -14,7 +14,12 @@ class Teacher extends User
     protected $table = 'users';
 
     protected $fillable = [
+        'first_name',
+        'last_name',
+        'email',
+        'password',
         'type',
+        'avatar',
     ];
 
     public static function booted(): void
