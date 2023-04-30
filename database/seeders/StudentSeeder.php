@@ -12,6 +12,6 @@ class StudentSeeder extends Seeder
      */
     public function run(): void
     {
-        Student::factory(25)->onTeam()->withGrade()->create();
+        Student::factory(25)->withTeacher()->withGrade()->create();
     }
 }

@@ -1,1 +1,0 @@
-export { useTeamsQuery } from './useTeamsQuery'

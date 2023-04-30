@@ -6,8 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
 use App\Models\Student;
-use App\Models\Team;
+use App\Models\Teacher;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response as HttpCodes;
 
 class StudentController extends Controller
@@ -17,6 +18,10 @@ class StudentController extends Controller
      */
     public function index(): JsonResponse
     {
+        $teacher = Teacher::findOrFail(Auth::id());
+        $students = $teacher->students()->with('grade')->get();
+
+        return response()->json($students, HttpCodes::HTTP_OK);
     }
 
     /**
@@ -25,8 +30,8 @@ class StudentController extends Controller
     public function store(StoreStudentRequest $request): JsonResponse
     {
         $student = Student::create($request->validated());
-        $team = Team::find($request->team_id);
-        $team->students()->attach($student);
+        $teacher = Teacher::findOrFail(Auth::id());
+        $student->teacher()->attach($teacher->id);
 
         return response()->json($student, HttpCodes::HTTP_CREATED);
     }
@@ -36,7 +41,7 @@ class StudentController extends Controller
      */
     public function show(string $id): JsonResponse
     {
-        $student = Student::find($id);
+        $student = Student::findOrFail($id);
 
         return response()->json($student, HttpCodes::HTTP_OK);
     }

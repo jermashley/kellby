@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\TeamController;
 use App\Models\TimeLog;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -55,7 +54,8 @@ Route::prefix('user')->middleware('auth')->as('user.')->group(function () {
     });
 });
 
-// Team routes
-Route::resource('team', TeamController::class)->middleware('auth');
+Route::get('students', function () {
+    return Inertia::render('Students/Index');
+})->middleware('auth')->name('students.index');
 
 require __DIR__.'/auth.php';

@@ -6,7 +6,6 @@ import {
   faSignOut,
   faSquareKanban,
   faUser,
-  faUsersLine,
 } from '@fortawesome/pro-duotone-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useLogoutMutation } from '@Hooks/Mutations/Auth'
@@ -126,14 +125,6 @@ export const Navigation = () => {
             <Link href={`/user/profile`}>
               <Menu.Item icon={<FontAwesomeIcon icon={faUser} fixedWidth />}>
                 Profile
-              </Menu.Item>
-            </Link>
-
-            <Link href="/team">
-              <Menu.Item
-                icon={<FontAwesomeIcon icon={faUsersLine} fixedWidth />}
-              >
-                Team
               </Menu.Item>
             </Link>
 

@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Grade;
 use App\Models\Student;
+use App\Models\Teacher;
 use App\Models\Team;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
@@ -36,10 +37,10 @@ class StudentFactory extends Factory
     /**
      * Attach the User to a team.
      */
-    public function onTeam(): static
+    public function withTeacher(): static
     {
         return $this->afterCreating(function (Student $student) {
-            $student->teams()->attach(Team::inRandomOrder()->first()->id ?? Team::factory()->create()->id);
+            $student->teacher()->attach(Teacher::inRandomOrder()->first()->id ?? Teacher::factory()->create()->id);
         });
     }
 

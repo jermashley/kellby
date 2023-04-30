@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Teacher;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -29,15 +28,5 @@ class TeacherFactory extends Factory
             'type' => 'teacher',
             'avatar' => fake()->imageUrl(512, 512, 'cats'),
         ];
-    }
-
-    /**
-     * Attach the User to a team.
-     */
-    public function withTeam(): static
-    {
-        return $this->afterCreating(function (Teacher $teacher) {
-            $teacher->teams()->attach($this->faker->unique()->numberBetween(1, 10));
-        });
     }
 }
