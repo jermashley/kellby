@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
 
 const createTeam = async (formData = {}) => {
-  const data = await axios.post(`/team`, {
+  const data = await axios.post(`/api/team`, {
     ...formData,
   })
 

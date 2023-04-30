@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\TeamController;
+use App\Http\Controllers\Api\TeamMemberController;
+use App\Http\Controllers\Api\UserTypesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,10 +17,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::middleware(['auth:sanctum'])->as('api.')->group(function () {
-    Route::apiResource('team', TeamController::class)->middleware(['auth']);
+    Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
+        return $request->user();
+    });
+
+    Route::get('user/types', UserTypesController::class)->middleware('guest')->name('User.types');
+
+    Route::prefix('team')->middleware('auth')->as('team.')->group(function () {
+        Route::apiResource('/', TeamController::class);
+        Route::post('attach', [TeamMemberController::class, 'attach'])->name('attach');
+        Route::post('detach', [TeamMemberController::class, 'detach'])->name('detach');
+    });
 });

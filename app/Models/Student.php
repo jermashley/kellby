@@ -28,15 +28,15 @@ class Student extends User
     }
 
     /**
-     * Get the teams that the User belongs to
+     * Get the teacher for the Student belongs to.
      */
-    public function teams(): BelongsToMany
+    public function teacher(): BelongsToMany
     {
-        return $this->belongsToMany(Team::class, 'team_member', 'user_id', 'team_id');
+        return $this->belongsToMany(Teacher::class, 'teacher_student', 'student_id', 'teacher_id');
     }
 
     /**
-     * Get the grade for the User
+     * Get the grade for the Student
      */
     public function grade(): BelongsTo
     {

@@ -12,5 +12,7 @@ export const useTeamsQuery = ({ config = {} } = {}) =>
     queryKey: [`teams`],
     queryFn: () => getTeams(),
 
+    select: ({ data }) => data,
+
     ...config,
   })

@@ -4,15 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreTeamRequest;
 use App\Http\Requests\UpdateTeamRequest;
-use App\Models\Teacher;
 use App\Models\Team;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response as InertiaResponse;
-use Symfony\Component\HttpFoundation\Response as HttpCodes;
 
 class TeamController extends Controller
 {
@@ -37,15 +34,7 @@ class TeamController extends Controller
      */
     public function store(StoreTeamRequest $request): JsonResponse
     {
-        $team = Team::create([
-            'name' => $request->name,
-        ]);
-
-        $teacher = Teacher::find(Auth::id());
-
-        $teacher->teams()->attach($team);
-
-        return response()->json([], HttpCodes::HTTP_CREATED);
+        //
     }
 
     /**

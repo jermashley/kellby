@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Teacher;
+use App\Models\Team;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response as HttpCodes;
 
 class TeamController extends Controller
 {
@@ -25,9 +27,17 @@ class TeamController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): Response
+    public function store(Request $request): JsonResponse
     {
-        //
+        $team = Team::create([
+            'name' => $request->name,
+        ]);
+
+        $teacher = Teacher::find(Auth::id());
+
+        $teacher->teams()->attach($team);
+
+        return response()->json([], HttpCodes::HTTP_CREATED);
     }
 
     /**

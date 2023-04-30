@@ -31,8 +31,11 @@ class Teacher extends User
         });
     }
 
-    public function teams(): BelongsToMany
+    /**
+     * Get the students for the Teacher has many.
+     */
+    public function students(): BelongsToMany
     {
-        return $this->belongsToMany(Team::class, 'team_owner', 'user_id', 'team_id');
+        return $this->belongsToMany(Student::class, 'teacher_student', 'teacher_id', 'student_id');
     }
 }

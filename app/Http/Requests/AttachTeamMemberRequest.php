@@ -4,10 +4,10 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreStudentRequest extends FormRequest
+class AttachTeamMemberRequest extends FormRequest
 {
     /**
-     * Determine if the User is authorized to make this request.
+     * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
@@ -22,9 +22,8 @@ class StoreStudentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'team_id' => 'required|exists:teams,id',
+            'student_id' => ['required', 'exists:students,id'],
+            'team_id' => ['required', 'exists:teams,id'],
         ];
     }
 }

@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\TeamController;
-use App\Http\Controllers\UserTypesController;
 use App\Models\TimeLog;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -20,17 +19,25 @@ use Inertia\Inertia;
 
 Route::get('/', function () {
     if (Auth::user()) {
-        return redirect('dashboard');
+        return redirect()->route('dashboard');
     }
 
     return Inertia::render('Public/Home/Index');
 });
 
 Route::get('/register', function () {
+    if (Auth::user()) {
+        return redirect()->route('dashboard');
+    }
+
     return Inertia::render('Public/Auth/Register');
 })->middleware('guest')->name('register');
 
 Route::get('/login', function () {
+    if (Auth::user()) {
+        return redirect()->route('dashboard');
+    }
+
     return Inertia::render('Public/Auth/Login');
 })->middleware('guest')->name('login');
 
@@ -47,8 +54,6 @@ Route::prefix('user')->middleware('auth')->as('user.')->group(function () {
         ]);
     });
 });
-
-Route::get('/User/types', UserTypesController::class)->middleware('guest')->name('User.types');
 
 // Team routes
 Route::resource('team', TeamController::class)->middleware('auth');

@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
 const getUserTypes = async () => {
-  const data = await axios.get(`/user/types`)
+  const data = await axios.get(`/api/user/types`)
 
   return data
 }
