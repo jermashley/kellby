@@ -18,6 +18,10 @@ class Student extends User
         'type',
     ];
 
+    protected $hidden = [
+        'id',
+    ];
+
     public static function booted(): void
     {
         static::addGlobalScope(new StudentScope);
@@ -25,6 +29,14 @@ class Student extends User
         static::creating(function ($student) {
             $student->type = 'student';
         });
+    }
+
+    /**
+     * Get the route key for the model.
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'uuid';
     }
 
     /**

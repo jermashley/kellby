@@ -1,16 +1,18 @@
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
-const getStudent = async (id) => {
-  const data = await axios.get(`/api/student/${id}`)
+const getStudent = async (uuid) => {
+  const data = await axios.get(`/api/student/${uuid}`)
 
   return data
 }
 
-export const useStudentQuery = ({ id = undefined, config = {} } = {}) =>
+export const useStudentQuery = ({ uuid = undefined, config = {} } = {}) =>
   useQuery({
-    queryKey: [`student`, id],
-    queryFn: () => getStudent(id),
+    queryKey: [`student`, uuid],
+    queryFn: () => getStudent(uuid),
+
+    select: ({ data }) => data,
 
     ...config,
   })

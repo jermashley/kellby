@@ -1,5 +1,6 @@
 import { useStudentsQuery } from '@Hooks/Queries/Student'
-import { Table } from '@mantine/core'
+import { Link } from '@inertiajs/react'
+import { Button, Table } from '@mantine/core'
 
 const StudentsPage = () => {
   const students = useStudentsQuery()
@@ -9,6 +10,13 @@ const StudentsPage = () => {
       <td>{student.first_name}</td>
       <td>{student.last_name}</td>
       <td>{student.grade.name}</td>
+      <td>
+        <Link href={`/students/${student.uuid}`}>
+          <Button variant={`default`} size={`xs`}>
+            View
+          </Button>
+        </Link>
+      </td>
     </tr>
   ))
 
@@ -22,6 +30,7 @@ const StudentsPage = () => {
             <th>First Name</th>
             <th>Last Name</th>
             <th>Grade</th>
+            <th></th>
           </tr>
         </thead>
 

@@ -58,4 +58,10 @@ Route::get('students', function () {
     return Inertia::render('Students/Index');
 })->middleware('auth')->name('students.index');
 
+Route::get('students/{student:uuid}', function ($uuid) {
+    return Inertia::render('Students/Show', [
+        'uuid' => $uuid,
+    ]);
+})->middleware('auth')->name('students.show');
+
 require __DIR__.'/auth.php';

@@ -39,10 +39,8 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id): JsonResponse
+    public function show(Student $student): JsonResponse
     {
-        $student = Student::findOrFail($id);
-
         return response()->json($student, HttpCodes::HTTP_OK);
     }
 
