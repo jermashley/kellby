@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\TimeLog;
+use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -48,20 +48,10 @@ Route::get('/dashboard', function () {
 // User routes
 Route::prefix('user')->middleware('auth')->as('user.')->group(function () {
     Route::get('/profile', function () {
-        return Inertia::render('User/Profile/Index', [
-            'log' => TimeLog::first(),
-        ]);
+        return Inertia::render('User/Profile/Index');
     });
 });
 
-Route::get('students', function () {
-    return Inertia::render('Students/Index');
-})->middleware('auth')->name('students.index');
-
-Route::get('students/{student:uuid}', function ($uuid) {
-    return Inertia::render('Students/Show', [
-        'uuid' => $uuid,
-    ]);
-})->middleware('auth')->name('students.show');
+Route::resource('student', StudentController::class)->only(['index', 'show'])->middleware('auth');
 
 require __DIR__.'/auth.php';

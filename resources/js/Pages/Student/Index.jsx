@@ -11,7 +11,7 @@ const StudentsPage = () => {
       <td>{student.last_name}</td>
       <td>{student.grade.name}</td>
       <td>
-        <Link href={`/students/${student.uuid}`}>
+        <Link href={`/student/${student.uuid}`}>
           <Button variant={`default`} size={`xs`}>
             View
           </Button>

@@ -2,7 +2,6 @@ import { useStudentQuery } from '@Hooks/Queries/Student'
 
 const ShowStudentPage = ({ uuid }) => {
   const student = useStudentQuery({ uuid })
-  console.log(student.data)
 
   return (
     <div className="min-h-screen w-full">

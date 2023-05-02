@@ -7,15 +7,17 @@ use App\Http\Requests\UpdateStudentRequest;
 use App\Models\Student;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use Inertia\Inertia;
+use Inertia\Response as InertiaResponse;
 
 class StudentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): Response
+    public function index(): InertiaResponse
     {
-        //
+        return Inertia::render('Student/Index');
     }
 
     /**
@@ -37,9 +39,11 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Student $student): Response
+    public function show(Student $student): InertiaResponse
     {
-        //
+        return Inertia::render('Student/Show', [
+            'uuid' => $student->uuid,
+        ]);
     }
 
     /**

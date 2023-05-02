@@ -70,7 +70,7 @@ export const Navigation = () => {
           />
         </Link>
 
-        <Link href="/students">
+        <Link href="/student">
           <NavLink
             component="div"
             label="Students"
