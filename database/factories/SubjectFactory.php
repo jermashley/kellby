@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\SubjectEnum;
 use App\Enums\SubjectTypeEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -17,14 +18,8 @@ class SubjectFactory extends Factory
      */
     public function definition(): array
     {
-        $subjectTypeLabels = [];
-
-        foreach (SubjectTypeEnum::toArray() as $type) {
-            $subjectTypeLabels[] = $type['label'];
-        }
-
         return [
-            'name' => $this->faker->unique()->randomElement(['Reading', 'Math', 'Social Studies', 'Language Arts', 'Science']),
+            'name' => $this->faker->unique()->randomElement(SubjectEnum::toFlatArray()),
             'type' => SubjectTypeEnum::CORE,
         ];
     }

@@ -1,0 +1,1 @@
+export { useSubjectMutation } from './useSubjectMutation'

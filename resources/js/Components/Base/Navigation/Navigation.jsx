@@ -82,7 +82,7 @@ export const Navigation = () => {
           />
         </Link>
 
-        <Link href="/subjects">
+        <Link href="/subject">
           <NavLink
             component="div"
             label="Subjects"

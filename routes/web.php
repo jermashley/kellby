@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\SubjectController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -53,5 +54,7 @@ Route::prefix('user')->middleware('auth')->as('user.')->group(function () {
 });
 
 Route::resource('student', StudentController::class)->only(['index', 'show'])->middleware('auth');
+
+Route::resource('subject', SubjectController::class)->only(['index', 'show'])->middleware('auth');
 
 require __DIR__.'/auth.php';

@@ -4,16 +4,19 @@ namespace App\Enums;
 
 use App\Interfaces\StaticArrayable;
 
-enum SubjectTypeEnum: string implements StaticArrayable
+enum SubjectEnum: string implements StaticArrayable
 {
-    case CORE = 'core';
-    case ELECTIVE = 'elective';
+    case READING = 'Reading';
+    case MATH = 'Math';
+    case SOCIAL_STUDIES = 'Social Studies';
+    case LANGUAGE_ARTS = 'Language Arts';
+    case SCIENCE = 'Science';
 
     public static function toArray(): array
     {
         $data = [];
 
-        foreach (SubjectTypeEnum::cases() as $type) {
+        foreach (SubjectEnum::cases() as $type) {
             $data[] = [
                 'name' => $type->name,
                 'label' => $type->value,
@@ -27,7 +30,7 @@ enum SubjectTypeEnum: string implements StaticArrayable
     {
         $data = [];
 
-        foreach (SubjectTypeEnum::cases() as $type) {
+        foreach (SubjectEnum::cases() as $type) {
             $data[$type->name] = $type->value;
         }
 
