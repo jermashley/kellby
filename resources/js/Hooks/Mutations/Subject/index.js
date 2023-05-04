@@ -1,1 +1,1 @@
-export { useSubjectMutation } from './useSubjectMutation'
+export { useStoreSubjectMutation } from './useStoreSubjectMutation'

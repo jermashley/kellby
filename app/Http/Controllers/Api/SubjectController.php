@@ -33,9 +33,9 @@ class SubjectController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id): Response
+    public function show(string $id): JsonResponse
     {
-        //
+        return response()->json(Subject::findOrFail($id), HttpResonses::HTTP_OK);
     }
 
     /**
@@ -49,8 +49,16 @@ class SubjectController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): Response
+    public function destroy(Subject $subject): JsonResponse
     {
-        //
+        if (empty($subject->teacher_id)) {
+            return response()->json([
+                'message' => 'Cannot delete system subject.',
+            ], HttpResonses::HTTP_BAD_REQUEST);
+        }
+
+        $subject->delete();
+
+        return response()->json(null, HttpResonses::HTTP_NO_CONTENT);
     }
 }

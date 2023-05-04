@@ -1,3 +1,4 @@
+import { router } from '@inertiajs/react'
 import { notifications } from '@mantine/notifications'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import axios from 'axios'
@@ -8,7 +9,7 @@ const storeSubject = async (formData) => {
   return data
 }
 
-export const useSubjectMutation = ({ config = {} } = {}) => {
+export const useStoreSubjectMutation = ({ config = {} } = {}) => {
   const queryClient = useQueryClient()
 
   return useMutation({
@@ -16,11 +17,14 @@ export const useSubjectMutation = ({ config = {} } = {}) => {
 
     onSuccess: ({ data }) => {
       queryClient.invalidateQueries([`subjects`])
+
       notifications.show({
         title: `Created ${data.name}`,
         message: `Subject created successfully! 😀`,
         color: `green`,
       })
+
+      router.visit(`/subject`)
     },
 
     ...config,

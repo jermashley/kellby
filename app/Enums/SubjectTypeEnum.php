@@ -16,7 +16,7 @@ enum SubjectTypeEnum: string implements StaticArrayable
         foreach (SubjectTypeEnum::cases() as $type) {
             $data[] = [
                 'name' => $type->name,
-                'label' => $type->value,
+                'value' => $type->value,
             ];
         }
 

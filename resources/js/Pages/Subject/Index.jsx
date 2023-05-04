@@ -1,28 +1,48 @@
-import { faPlus } from '@fortawesome/pro-duotone-svg-icons'
+import { faPlus, faTrashAlt } from '@fortawesome/pro-duotone-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useDestroySubjectMutation } from '@Hooks/Mutations/Subject/useDestroySubjectMutation'
 import { useSubjectsQuery } from '@Hooks/Queries/Subject'
-import { Button, Card, Group, Table } from '@mantine/core'
+import { Link } from '@inertiajs/react'
+import { Button, Card, Group, Table, Text } from '@mantine/core'
 
 const SubjectIndexPage = () => {
   const subjects = useSubjectsQuery()
+  const destroySubject = useDestroySubjectMutation()
 
   const rows = subjects.data?.map((subject) => (
-    <tr key={subject.uuid}>
+    <tr key={subject.uuid} className={`group`}>
       <td>{subject.name}</td>
       <td className={`capitalize`}>{subject.type}</td>
+      <td>
+        {subject.teacher_id ? (
+          <Button
+            className={`opacity-0 group-hover:opacity-100`}
+            size={`xs`}
+            variant={`default`}
+            color="red"
+            onClick={() => destroySubject.mutate({ uuid: subject.uuid })}
+          >
+            <FontAwesomeIcon icon={faTrashAlt} fixedWidth />
+          </Button>
+        ) : null}
+      </td>
     </tr>
   ))
 
   return (
     <div className="min-h-screen w-full">
       <Card shadow="sm" className={`mt-4`} withBorder>
-        <Card.Section withBorder inheritPadding px={`md`} py={`sm`}>
+        <Card.Section withBorder inheritPadding px={`lg`} py={`sm`}>
           <Group position={`apart`}>
-            <p className={`text-zinc-700`}>Subjects</p>
+            <Text size="xl" weight={700}>
+              Subjects
+            </Text>
 
-            <Button variant={`default`} size={`xs`}>
-              <FontAwesomeIcon icon={faPlus} fixedWidth />
-            </Button>
+            <Link href={`/subject/create`}>
+              <Button component="div" variant={`default`} size={`xs`}>
+                <FontAwesomeIcon icon={faPlus} fixedWidth />
+              </Button>
+            </Link>
           </Group>
         </Card.Section>
 
@@ -31,6 +51,7 @@ const SubjectIndexPage = () => {
             <tr>
               <th>Name</th>
               <th>Type</th>
+              <th></th>
             </tr>
           </thead>
 

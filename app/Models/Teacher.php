@@ -6,10 +6,11 @@ use App\Models\Scopes\TeacherScope;
 use App\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Teacher extends User
 {
-    use HasFactory, HasUuid;
+    use HasFactory, HasUuid, SoftDeletes;
 
     protected $table = 'users';
 
