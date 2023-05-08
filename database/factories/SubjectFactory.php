@@ -19,8 +19,8 @@ class SubjectFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->unique()->randomElement(SubjectEnum::toFlatArray()),
-            'type' => SubjectTypeEnum::CORE,
+            'name' => $this->faker->unique()->randomElement(SubjectEnum::options()),
+            'type' => SubjectTypeEnum::core,
         ];
     }
 }

@@ -1,4 +1,3 @@
-import { capitalize } from '@Lib/capitalize'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
@@ -12,14 +11,8 @@ export const useSubjectTypesQuery = ({ config = {} } = {}) =>
     queryFn: getSubjectTypes,
 
     select: ({ data }) => {
-      return data.reduce((array, current, index) => {
-        array[index] = {
-          value: current[`value`],
-          label: capitalize(current[`value`]),
-        }
-
-        return array
-      }, [])
+      console.log(data)
+      return data
     },
 
     ...config,

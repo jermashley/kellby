@@ -3,11 +3,40 @@
 namespace App\Enums;
 
 use App\Interfaces\StaticArrayable;
+use Illuminate\Support\Collection;
 
 enum SubjectTypeEnum: string implements StaticArrayable
 {
-    case CORE = 'core';
-    case ELECTIVE = 'elective';
+    case core = 'core';
+    case elective = 'elective';
+
+    public function label(): string
+    {
+        return match ($this) {
+            self::core => 'Core',
+            self::elective => 'Elective',
+        };
+    }
+
+    public static function options(): Collection
+    {
+        return collect(self::cases())->mapWithKeys(function (SubjectTypeEnum $type) {
+            return [
+                $type->value => $type->label(),
+            ];
+        });
+    }
+
+    public static function optionsForSelect(): Collection
+    {
+        return collect(self::cases())->map(function (SubjectTypeEnum $type) {
+            return
+                [
+                    'label' => $type->label(),
+                    'value' => $type->value,
+                ];
+        });
+    }
 
     public static function toArray(): array
     {

@@ -11,6 +11,6 @@ class SubjectTypesController extends Controller
 {
     public function __invoke(): JsonResponse
     {
-        return response()->json(SubjectTypeEnum::toArray(), HttpCodes::HTTP_OK);
+        return response()->json(SubjectTypeEnum::optionsForSelect(), HttpCodes::HTTP_OK);
     }
 }

@@ -3,14 +3,35 @@
 namespace App\Enums;
 
 use App\Interfaces\StaticArrayable;
+use Illuminate\Support\Collection;
 
 enum SubjectEnum: string implements StaticArrayable
 {
-    case READING = 'Reading';
-    case MATH = 'Math';
-    case SOCIAL_STUDIES = 'Social Studies';
-    case LANGUAGE_ARTS = 'Language Arts';
-    case SCIENCE = 'Science';
+    case reading = 'reading';
+    case math = 'math';
+    case social_studies = 'social studies';
+    case language_arts = 'language arts';
+    case science = 'science';
+
+    public function label(): string
+    {
+        return match ($this) {
+            self::reading => 'Reading',
+            self::math => 'Math',
+            self::social_studies => 'Social Studies',
+            self::language_arts => 'Language Arts',
+            self::science => 'Science',
+        };
+    }
+
+    public static function options(): Collection
+    {
+        return collect(self::cases())->mapWithKeys(function (SubjectEnum $subject) {
+            return [
+                $subject->value => $subject->label(),
+            ];
+        });
+    }
 
     public static function toArray(): array
     {
