@@ -1,30 +1,19 @@
-import { faPlus, faTrashAlt } from '@fortawesome/pro-duotone-svg-icons'
+import { DeleteSubjectButton } from '@Components/Feature/Subject/DeleteSubjectButton'
+import { faPlus } from '@fortawesome/pro-duotone-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useDestroySubjectMutation } from '@Hooks/Mutations/Subject/useDestroySubjectMutation'
 import { useSubjectsQuery } from '@Hooks/Queries/Subject'
 import { Link } from '@inertiajs/react'
 import { Button, Card, Group, Table, Text } from '@mantine/core'
 
 const SubjectIndexPage = () => {
   const subjects = useSubjectsQuery()
-  const destroySubject = useDestroySubjectMutation()
 
   const rows = subjects.data?.map((subject) => (
     <tr key={subject.uuid} className={`group`}>
       <td>{subject.name}</td>
       <td className={`capitalize`}>{subject.type}</td>
       <td>
-        {subject.teacher_id ? (
-          <Button
-            className={`opacity-0 group-hover:opacity-100`}
-            size={`xs`}
-            variant={`default`}
-            color="red"
-            onClick={() => destroySubject.mutate({ uuid: subject.uuid })}
-          >
-            <FontAwesomeIcon icon={faTrashAlt} fixedWidth />
-          </Button>
-        ) : null}
+        {subject.teacher_id ? <DeleteSubjectButton subject={subject} /> : null}
       </td>
     </tr>
   ))

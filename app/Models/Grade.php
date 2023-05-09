@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Grade extends Model
@@ -47,5 +48,13 @@ class Grade extends Model
     public function getDescriptionAttribute(): string
     {
         return $this->name.' Grade';
+    }
+
+    /**
+     * The students that belong to the grade.
+     */
+    public function students(): BelongsToMany
+    {
+        return $this->belongsToMany(Student::class, 'student_grade', 'grade_id', 'student_id');
     }
 }

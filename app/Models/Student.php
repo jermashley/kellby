@@ -5,8 +5,9 @@ namespace App\Models;
 use App\Models\Scopes\StudentScope;
 use App\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Student extends User
@@ -51,8 +52,13 @@ class Student extends User
     /**
      * Get the grade for the Student
      */
-    public function grade(): BelongsTo
+    public function grade(): HasOneThrough
     {
-        return $this->belongsTo(Grade::class);
+        return $this->hasOneThrough(Grade::class, GradeStudent::class, 'student_id', 'id', 'id', 'grade_id');
+    }
+
+    public function timeLogs(): HasMany
+    {
+        return $this->hasMany(TimeLog::class);
     }
 }

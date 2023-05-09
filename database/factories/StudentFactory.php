@@ -46,8 +46,8 @@ class StudentFactory extends Factory
      */
     public function withGrade(): static
     {
-        return $this->state(fn (array $attributes) => [
-            'grade_id' => Grade::inRandomOrder()->first()->id,
-        ]);
+        return $this->afterCreating(function (Student $student) {
+            Grade::inRandomOrder()->first()->students()->attach($student->id);
+        });
     }
 }

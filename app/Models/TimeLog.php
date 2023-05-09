@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class TimeLog extends Model
@@ -33,5 +34,29 @@ class TimeLog extends Model
     public function getMillisecondsAttribute(): int
     {
         return $this->seconds * 1000;
+    }
+
+    /**
+     * Get the student that owns the TimeLog.
+     */
+    public function student(): BelongsTo
+    {
+        return $this->belongsTo(Student::class);
+    }
+
+    /**
+     * Get the subject that owns the TimeLog.
+     */
+    public function subject(): BelongsTo
+    {
+        return $this->belongsTo(Subject::class);
+    }
+
+    /**
+     * Get the grade that owns the TimeLog.
+     */
+    public function grade(): BelongsTo
+    {
+        return $this->belongsTo(Grade::class);
     }
 }

@@ -8,7 +8,7 @@ use App\Models\Subject;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Symfony\Component\HttpFoundation\Response as HttpResonses;
+use Symfony\Component\HttpFoundation\Response as HttpResponses;
 
 class SubjectController extends Controller
 {
@@ -17,7 +17,7 @@ class SubjectController extends Controller
      */
     public function index(): JsonResponse
     {
-        return response()->json(Subject::all(), HttpResonses::HTTP_OK);
+        return response()->json(Subject::all(), HttpResponses::HTTP_OK);
     }
 
     /**
@@ -27,7 +27,7 @@ class SubjectController extends Controller
     {
         $subject = Subject::create($request->validated());
 
-        return response()->json($subject, HttpResonses::HTTP_CREATED);
+        return response()->json($subject, HttpResponses::HTTP_CREATED);
     }
 
     /**
@@ -35,7 +35,7 @@ class SubjectController extends Controller
      */
     public function show(string $id): JsonResponse
     {
-        return response()->json(Subject::findOrFail($id), HttpResonses::HTTP_OK);
+        return response()->json(Subject::findOrFail($id), HttpResponses::HTTP_OK);
     }
 
     /**
@@ -54,11 +54,11 @@ class SubjectController extends Controller
         if (empty($subject->teacher_id)) {
             return response()->json([
                 'message' => 'Cannot delete system subject.',
-            ], HttpResonses::HTTP_BAD_REQUEST);
+            ], HttpResponses::HTTP_BAD_REQUEST);
         }
 
         $subject->delete();
 
-        return response()->json(null, HttpResonses::HTTP_NO_CONTENT);
+        return response()->json(null, HttpResponses::HTTP_NO_CONTENT);
     }
 }
