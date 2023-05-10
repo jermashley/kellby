@@ -1,5 +1,5 @@
 module.exports = {
-  plugins: [`simple-import-sort`],
+  plugins: [`simple-import-sort`, `@tanstack/query`],
   root: true,
   parserOptions: {
     ecmaVersion: 2020,
@@ -25,6 +25,7 @@ module.exports = {
     `plugin:jsx-a11y/recommended`,
     `plugin:prettier/recommended`,
     `plugin:cypress/recommended`,
+    `plugin:@tanstack/eslint-plugin-query/recommended`,
   ],
   rules: {
     'prettier/prettier': [`error`, {}, { usePrettierrc: true }],
