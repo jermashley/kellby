@@ -10,10 +10,7 @@ export const useSubjectTypesQuery = ({ config = {} } = {}) =>
     queryKey: [`subject-types`],
     queryFn: getSubjectTypes,
 
-    select: ({ data }) => {
-      console.log(data)
-      return data
-    },
+    select: ({ data }) => data,
 
     ...config,
   })
