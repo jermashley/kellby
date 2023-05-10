@@ -8,9 +8,9 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { AuthContextProvider } from './AuthContext'
 import { NavigationContextProvider } from './NavigationContextProvider'
 
-export const AppContextProvider = ({ children }) => {
-  const queryClient = new QueryClient()
+const queryClient = new QueryClient()
 
+export const AppContextProvider = ({ children }) => {
   const providers = [AuthContextProvider, NavigationContextProvider]
 
   return (
