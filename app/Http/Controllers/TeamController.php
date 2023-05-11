@@ -5,34 +5,31 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTeamRequest;
 use App\Http\Requests\UpdateTeamRequest;
 use App\Models\Team;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
-use Inertia\Inertia;
-use Inertia\Response as InertiaResponse;
 
 class TeamController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): InertiaResponse
+    public function index(): Response
     {
-        return Inertia::render('Team/Index');
+        //
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): InertiaResponse
+    public function create(): Response
     {
-        return Inertia::render('Team/Create');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTeamRequest $request): JsonResponse
+    public function store(StoreTeamRequest $request): RedirectResponse
     {
         //
     }

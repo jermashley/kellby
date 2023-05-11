@@ -3,6 +3,11 @@
 namespace Database\Factories;
 
 use App\Enums\UserRoleEnum;
+use App\Models\Grade;
+use App\Models\Subject;
+use App\Models\Team;
+use App\Models\TimeLog;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -49,7 +54,9 @@ class UserFactory extends Factory
      */
     public function teacher(): static
     {
-        return $this->assignRole(UserRoleEnum::teacher->value);
+        return $this->afterCreating(function (User $user) {
+            $user->assignRole(UserRoleEnum::teacher->value);
+        });
     }
 
     /**
@@ -59,6 +66,47 @@ class UserFactory extends Factory
      */
     public function student(): static
     {
-        return $this->assignRole(UserRoleEnum::student->value);
+        return $this->afterCreating(function (User $user) {
+            $user->assignRole(UserRoleEnum::student->value);
+
+            // Get a random team and attach the student to it.
+            $team = Team::inRandomOrder()->first();
+            if ($team) {
+                $team->users()->attach($user->id);
+            }
+        });
+    }
+
+    /**
+     * Indicate that the model owns a team.
+     *
+     * @return $this
+     */
+    public function withTeam(): static
+    {
+        return $this->afterCreating(function (User $user) {
+            Team::factory()->create([
+                'owner_id' => $user->id,
+            ]);
+        });
+    }
+
+    /**
+     * Indicate that the model has time logs.
+     *
+     * @return $this
+     */
+    public function withTimeLogs(int $count = 1): static
+    {
+        return $this->afterCreating(function (User $user) use ($count) {
+            for ($i = 0; $i < $count; $i++) {
+                TimeLog::factory()->create([
+                    'user_id' => $user->id,
+                    'grade_id' => Grade::inRandomOrder()->first()->id,
+                    'subject_id' => Subject::inRandomOrder()->first()->id,
+                    'seconds' => $this->faker->numberBetween(1800, 5400),
+                ]);
+            }
+        });
     }
 }

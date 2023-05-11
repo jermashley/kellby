@@ -33,6 +33,17 @@ enum SubjectEnum: string implements StaticArrayable
         });
     }
 
+    public static function optionsForSelect(): Collection
+    {
+        return collect(self::cases())->map(function (SubjectEnum $subject) {
+            return
+                [
+                    'label' => $subject->label(),
+                    'value' => $subject->value,
+                ];
+        });
+    }
+
     public static function toArray(): array
     {
         $data = [];

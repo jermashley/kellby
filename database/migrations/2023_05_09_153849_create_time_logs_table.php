@@ -16,24 +16,17 @@ return new class extends Migration
             $table->uuid();
             $table->integer('seconds')->nullable();
 
-            $table->unsignedBigInteger('student_id');
-            $table->unsignedBigInteger('subject_id');
-            $table->unsignedBigInteger('grade_id');
+            $table->foreignId('user_id')
+                ->constrained('users')
+                ->cascadeOnDelete();
 
-            $table->foreign('student_id')
-                ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
+            $table->foreignId('subject_id')
+                ->constrained('subjects')
+                ->cascadeOnDelete();
 
-            $table->foreign('subject_id')
-                ->references('id')
-                ->on('subjects')
-                ->onDelete('cascade');
-
-            $table->foreign('grade_id')
-                ->references('id')
-                ->on('grades')
-                ->onDelete('cascade');
+            $table->foreignId('grade_id')
+                ->constrained('grades')
+                ->cascadeOnDelete();
 
             $table->timestamps();
             $table->softDeletes();

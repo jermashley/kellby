@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Enums\SubjectEnum;
+use App\Enums\SubjectTypeEnum;
 use App\Models\Subject;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +14,11 @@ class SubjectSeeder extends Seeder
      */
     public function run(): void
     {
-        Subject::factory(5)->create();
+        foreach (SubjectEnum::optionsForSelect() as $grade) {
+            Subject::create([
+                'name' => $grade['label'],
+                'type' => SubjectTypeEnum::core,
+            ]);
+        }
     }
 }
