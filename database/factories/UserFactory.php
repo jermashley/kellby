@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\UserRoleEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -39,5 +40,25 @@ class UserFactory extends Factory
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
         ]);
+    }
+
+    /**
+     * Indicate that the model's type should be teacher.
+     *
+     * @return $this
+     */
+    public function teacher(): static
+    {
+        return $this->assignRole(UserRoleEnum::teacher->value);
+    }
+
+    /**
+     * Indicate that the model's type should be student.
+     *
+     * @return $this
+     */
+    public function student(): static
+    {
+        return $this->assignRole(UserRoleEnum::student->value);
     }
 }
