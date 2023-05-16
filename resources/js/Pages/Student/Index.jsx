@@ -9,7 +9,7 @@ const StudentsPage = () => {
     <tr key={student.uuid}>
       <td>{student.first_name}</td>
       <td>{student.last_name}</td>
-      <td>{student.grade.name}</td>
+      <td>{student.grade[0].name}</td>
       <td>
         <Link href={`/student/${student.uuid}`}>
           <Button variant={`default`} size={`xs`}>

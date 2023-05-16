@@ -23,9 +23,10 @@ Route::middleware(['auth:sanctum'])->as('api.')->group(function () {
         return $request->user();
     });
 
-    Route::get('user/types', UserTypesController::class)->middleware('auth')->name('User.types');
+    Route::get('/user/types', UserTypesController::class)->name('user.types');
 
-    Route::apiResource('student', StudentController::class);
+    Route::get('/student/{user}', [StudentController::class, 'show'])->name('student.show');
+    Route::apiResource('/student', StudentController::class);
 
     Route::get('/subject/types', SubjectTypesController::class)->name('subject.types');
     Route::apiResource('/subject', SubjectController::class);

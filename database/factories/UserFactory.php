@@ -69,8 +69,11 @@ class UserFactory extends Factory
         return $this->afterCreating(function (User $user) {
             $user->assignRole(UserRoleEnum::student->value);
 
+            $user->grade()->attach(Grade::inRandomOrder()->first()->id);
+
             // Get a random team and attach the student to it.
             $team = Team::inRandomOrder()->first();
+
             if ($team) {
                 $team->users()->attach($user->id);
             }
@@ -85,9 +88,11 @@ class UserFactory extends Factory
     public function withTeam(): static
     {
         return $this->afterCreating(function (User $user) {
-            Team::factory()->create([
+            $team = Team::factory()->create([
                 'owner_id' => $user->id,
             ]);
+
+            $team->users()->attach($user->id);
         });
     }
 

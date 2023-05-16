@@ -47,14 +47,15 @@ Route::get('/dashboard', function () {
 })->middleware('auth')->name('dashboard');
 
 // User routes
-Route::prefix('user')->middleware('auth')->as('user.')->group(function () {
+Route::prefix('/user')->middleware('auth')->as('user.')->group(function () {
     Route::get('/profile', function () {
         return Inertia::render('User/Profile/Index');
     });
 });
 
-Route::resource('student', StudentController::class)->only(['index', 'show'])->middleware('auth');
+Route::get('/student/{user}', [StudentController::class, 'show'])->name('student.show')->middleware('auth');
+Route::resource('/student', StudentController::class)->only(['index', 'create', 'show'])->middleware('auth');
 
-Route::resource('subject', SubjectController::class)->only(['index', 'show', 'create'])->middleware('auth');
+Route::resource('/subject', SubjectController::class)->only(['index', 'create', 'show'])->middleware('auth');
 
 require __DIR__.'/auth.php';

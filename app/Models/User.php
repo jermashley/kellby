@@ -52,6 +52,14 @@ class User extends Authenticatable
     ];
 
     /**
+     * Get the route key for the model.
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'uuid';
+    }
+
+    /**
      * Get the team the user owns.
      */
     public function ownedTeams(): HasMany
@@ -65,5 +73,21 @@ class User extends Authenticatable
     public function teams(): BelongsToMany
     {
         return $this->belongsToMany(Team::class);
+    }
+
+    /**
+     * Get the user's subjects.
+     */
+    public function subjects(): BelongsToMany
+    {
+        return $this->belongsToMany(Subject::class);
+    }
+
+    /**
+     * Get the user's grade.
+     */
+    public function grade(): BelongsToMany
+    {
+        return $this->belongsToMany(Grade::class);
     }
 }

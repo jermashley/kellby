@@ -1,19 +1,16 @@
 import { useRegisterUserForm } from '@Hooks/Forms/Auth'
 import { useRegisterUserMutation } from '@Hooks/Mutations/Auth'
-import { useUserTypes } from '@Hooks/Queries/User'
 import {
   Button,
   Card,
   Center,
   Flex,
   PasswordInput,
-  Select,
   TextInput,
   Title,
 } from '@mantine/core'
 
 const RegisterPage = () => {
-  const userTypes = useUserTypes()
   const registerUser = useRegisterUserMutation()
   const registerUserForm = useRegisterUserForm()
 
@@ -53,12 +50,6 @@ const RegisterPage = () => {
               type="email"
               {...registerUserForm.getInputProps(`email`)}
             />
-
-            {/*<Select*/}
-            {/*  label="Account Type"*/}
-            {/*  data={userTypes.data ?? [``]}*/}
-            {/*  placeholder={`Select an account type`}*/}
-            {/*/>*/}
 
             <PasswordInput
               withAsterisk

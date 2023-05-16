@@ -21,7 +21,7 @@ export const useRegisterUserMutation = ({ config = {} } = {}) =>
         color: `green`,
       })
 
-      router.visit(`/team/create`)
+      router.visit(`/dashboard`)
     },
 
     ...config,
