@@ -14,6 +14,6 @@ class SubjectScope implements Scope
      */
     public function apply(Builder $builder, Model $model): void
     {
-        $builder->where('teacher_id', Auth::id())->orWhereNull('teacher_id');
+        $builder->where('team_id', Auth::id())->orWhereNull('team_id');
     }
 }

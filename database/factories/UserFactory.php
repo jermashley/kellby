@@ -89,6 +89,7 @@ class UserFactory extends Factory
     {
         return $this->afterCreating(function (User $user) {
             $team = Team::factory()->create([
+                'name' => "$user->first_name's Team",
                 'owner_id' => $user->id,
             ]);
 

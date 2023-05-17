@@ -13,7 +13,7 @@ const SubjectIndexPage = () => {
       <td>{subject.name}</td>
       <td className={`capitalize`}>{subject.type}</td>
       <td>
-        {subject.teacher_id ? <DeleteSubjectButton subject={subject} /> : null}
+        {subject.team_id ? <DeleteSubjectButton subject={subject} /> : null}
       </td>
     </tr>
   ))

@@ -8,6 +8,7 @@ use App\Models\Subject;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response as HttpResponses;
 
 class SubjectController extends Controller
@@ -25,7 +26,9 @@ class SubjectController extends Controller
      */
     public function store(StoreSubjectRequest $request): JsonResponse
     {
-        $subject = Subject::create($request->validated());
+        $subject = Subject::create(array_merge($request->validated(), [
+            'team_id' => Auth::user()->teams->first()->id,
+        ]));
 
         return response()->json($subject, HttpResponses::HTTP_CREATED);
     }
@@ -51,7 +54,7 @@ class SubjectController extends Controller
      */
     public function destroy(Subject $subject): JsonResponse
     {
-        if (empty($subject->teacher_id)) {
+        if (empty($subject->team_id)) {
             return response()->json([
                 'message' => 'Cannot delete system subject.',
             ], HttpResponses::HTTP_BAD_REQUEST);

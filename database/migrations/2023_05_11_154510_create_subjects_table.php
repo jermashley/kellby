@@ -16,10 +16,9 @@ return new class extends Migration
             $table->uuid();
             $table->string('name');
             $table->string('type');
-            $table->unsignedBigInteger('teacher_id')->nullable();
-            $table->foreign('teacher_id')
-                ->references('id')
-                ->on('users')
+            $table->foreignId('team_id')
+                ->nullable()
+                ->constrained('teams')
                 ->cascadeOnDelete();
             $table->timestamps();
             $table->softDeletes();

@@ -14,9 +14,9 @@ class SubjectSeeder extends Seeder
      */
     public function run(): void
     {
-        foreach (SubjectEnum::optionsForSelect() as $grade) {
+        foreach (SubjectEnum::optionsForSelect() as $subject) {
             Subject::create([
-                'name' => $grade['label'],
+                'name' => $subject['label'],
                 'type' => SubjectTypeEnum::core,
             ]);
         }
