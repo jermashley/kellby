@@ -40,7 +40,7 @@ class RegisteredUserController extends Controller
 
         Team::create([
             'owner_id' => $user->id,
-            'name' => $user->first_name.'\'s Team',
+            'name' => "$user->first_name's Team",
         ]);
 
         event(new Registered($user));
