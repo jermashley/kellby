@@ -1,0 +1,1 @@
+export { StoreStudentButton } from './StoreStudentButton'

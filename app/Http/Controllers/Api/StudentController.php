@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use App\Enums\UserRoleEnum;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreStudentRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\Response as HttpCodes;
 
 class StudentController extends Controller
@@ -51,9 +53,18 @@ class StudentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): Response
+    public function store(StoreStudentRequest $request): JsonResponse
     {
-        //
+        $user = User::create(array_merge($request->validated(), [
+            // Set the user's password to a random string.
+            'password' => bcrypt(Str::random(32)),
+        ]));
+
+        $teacher = User::findOrFail($request->user->id);
+
+        $teacher->ownedTeams()->first()->attach($user->currentTeam->id);
+
+        return response()->json($user, HttpCodes::HTTP_CREATED);
     }
 
     /**

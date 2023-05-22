@@ -1,11 +1,11 @@
-import { faTrashAlt } from '@fortawesome/pro-duotone-svg-icons'
+import { useStoreStudentMutation } from '@Hooks/Mutations/Student'
+import { faPlus } from '@fortawesome/pro-duotone-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useDestroySubjectMutation } from '@Hooks/Mutations/Subject'
 import { Button, Group, Modal, Text } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 
-export const DeleteSubjectButton = ({ subject }) => {
-  const destroySubject = useDestroySubjectMutation()
+export const StoreStudentButton = () => {
+  const storeStudent = useStoreStudentMutation()
   const [opened, { open, close }] = useDisclosure(false)
 
   return (
@@ -17,11 +17,11 @@ export const DeleteSubjectButton = ({ subject }) => {
         color="red"
         onClick={() => open()}
       >
-        <FontAwesomeIcon icon={faTrashAlt} fixedWidth />
+        <FontAwesomeIcon icon={faPlus} fixedWidth />
       </Button>
 
       <Modal opened={opened} onClose={close} title={`Delete Subject?`} centered>
-        <Text>Are you sure you want to delete this subject?</Text>
+        <Text>Create student?</Text>
 
         <Group position={`right`} className={`mt-4`}>
           <Button variant="subtle" color="gray" onClick={() => close()}>
@@ -33,7 +33,7 @@ export const DeleteSubjectButton = ({ subject }) => {
             color="red"
             onClick={() => destroySubject.mutate({ uuid: subject.uuid })}
           >
-            Delete
+            Create
           </Button>
         </Group>
       </Modal>

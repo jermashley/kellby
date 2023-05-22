@@ -1,4 +1,4 @@
-import { DeleteSubjectButton } from '@Components/Feature/Subject/DeleteSubjectButton'
+import { DeleteSubjectButton } from '@Components/Feature/Subject/DeleteSubject'
 import { faPlus } from '@fortawesome/pro-duotone-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useSubjectsQuery } from '@Hooks/Queries/Subject'
